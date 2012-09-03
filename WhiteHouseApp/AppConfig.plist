@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>FacebookAppID</key>
+	<string>000000000000000</string>
+	<key>FeedConfigURL</key>
+	<string>http://your-site.example.com/files/config.json</string>
+	<key>GANAccountID</key>
+	<string>UA-00000000-0</string>
+	<key>SearchURLFormat</key>
+	<string>http://your-search-api.example.com/&amp;query=%@&amp;page=%i</string>
+	<key>ControlTintColor</key>
+	<string>#164c84</string>
+	<key>PhotoPostTitleColor</key>
+	<string>#5399e2</string>
+	<key>ToolbarBranding.iPadFontSize</key>
+	<integer>16</integer>
+	<key>ToolbarBranding.iPhoneFontSize</key>
+	<integer>12</integer>
+	<key>PrimaryBrandColor</key>
+	<string>#003366</string>
+	<key>HeadingFontName</key>
+	<string>Georgia</string>
+	<key>DetailFontName</key>
+	<string>Arial</string>
+	<key>ToolbarBranding.FontName</key>
+	<string>HoeflerText-Regular</string>
+	<key>LiveBarTitleFontName</key>
+	<string>Arial-BoldMT</string>
+	<key>LiveBarHandleFontName</key>
+	<string>Arial-BoldMT</string>
+	<key>TextExtractionXPath</key>
+	<string>//p | //div[not(starts-with(@class, &apos;field&apos;))]</string>
+	<key>ArticleBaseURL</key>
+	<string>http://www.example.com/</string>
+</dict>
+</plist>
