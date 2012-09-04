@@ -1,12 +1,12 @@
-[submodule "nimbus"]
-	path = libs/nimbus
-	url = https://github.com/mobomo/nimbus.git
-[submodule "asi-http-request"]
+[submodule "libs/asi-http-request"]
 	path = libs/asi-http-request
 	url = https://github.com/pokeb/asi-http-request.git
-[submodule "facebook"]
+[submodule "libs/facebook"]
 	path = libs/facebook
 	url = https://github.com/facebook/facebook-ios-sdk.git
-[submodule "SVPullToRefresh"]
+[submodule "libs/nimbus"]
+	path = libs/nimbus
+	url = https://github.com/mobomo/nimbus.git
+[submodule "libs/SVPullToRefresh"]
 	path = libs/SVPullToRefresh
 	url = https://github.com/samvermette/SVPullToRefresh.git
