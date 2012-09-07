@@ -57,6 +57,10 @@ To intialize submodules, run:
 
     git submodule update --init
 
+To build Facebook, `cd` into `libs/facebook` and run
+`./scripts/build_facebook_ios_sdk_static_lib.sh`. This will build the
+static library used by the app.
+
 ### Binary Libraries
 
 The following libraries must be downloaded and installed manually:
