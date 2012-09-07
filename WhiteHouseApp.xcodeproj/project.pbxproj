@@ -1591,6 +1591,7 @@
 				HEADER_SEARCH_PATHS = (
 					"\"${SDK_DIR}/usr/include/libxml2\"",
 					"\"$(SRCROOT)/libs/Airship\"",
+					"\"$(SRCROOT)/libs/facebook/lib/facebook-ios-sdk\"",
 				);
 				INFOPLIST_FILE = "WhiteHouseApp/WhiteHouseApp-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -1617,6 +1618,7 @@
 				HEADER_SEARCH_PATHS = (
 					"\"${SDK_DIR}/usr/include/libxml2\"",
 					"\"$(SRCROOT)/libs/Airship\"",
+					"\"$(SRCROOT)/libs/facebook/lib/facebook-ios-sdk\"",
 				);
 				INFOPLIST_FILE = "WhiteHouseApp/WhiteHouseApp-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
