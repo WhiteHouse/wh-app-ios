@@ -29,7 +29,7 @@
 //  WhiteHouseApp
 //
 //
-
+#import "AFImageRequestOperation.h"
 #import "WHPhotoViewController.h"
 
 #import "WHCaptionedPhotoView.h"
@@ -105,33 +105,27 @@
 {
     WHFeedItem *item = [self.feedItems objectAtIndex:photoIndex];
     WHMediaElement *mediaContent = [item bestContentForWidth:[UIScreen mainScreen].bounds.size.width];
-    NINetworkRequestOperation *loadOp = [[NINetworkRequestOperation alloc] initWithURL:mediaContent.URL];
-    loadOp.tag = photoIndex;
-    [loadOp setDidFinishBlock:^(NIOperation *operation) {
-        UIImage* image = [UIImage imageWithData:((NINetworkRequestOperation *) operation).data];
-        [self.imageCache storeObject:image withName:[self cacheKeyForPhotoAtIndex:photoIndex]];
-        [self.photoAlbumView didLoadPhoto:image atIndex:photoIndex photoSize:NIPhotoScrollViewPhotoSizeOriginal];
-    }];
-    
-    [self.queue addOperation:loadOp];
+    NSURLRequest *request = [NSURLRequest requestWithURL:mediaContent.URL];
+    AFImageRequestOperation *operation = [AFImageRequestOperation
+                                          imageRequestOperationWithRequest:request success:^(UIImage *image) {
+                                              [self.imageCache storeObject:image withName:[self cacheKeyForPhotoAtIndex:photoIndex]];
+                                              [self.photoAlbumView didLoadPhoto:image atIndex:photoIndex photoSize:NIPhotoScrollViewPhotoSizeOriginal];
+                                          }];
+    [operation start];
 }
-
 
 - (void)loadThumbnailAtIndex:(NSInteger)photoIndex
 {
     WHFeedItem *item = [self.feedItems objectAtIndex:photoIndex];
-    
     // get the smallest thumbnail available
     WHMediaElement *mediaContent = [item bestThumbnailForWidth:0];
-    NINetworkRequestOperation *loadOp = [[NINetworkRequestOperation alloc] initWithURL:mediaContent.URL];
-    loadOp.tag = photoIndex;
-    [loadOp setDidFinishBlock:^(NIOperation *operation) {
-        UIImage* image = [UIImage imageWithData:((NINetworkRequestOperation *) operation).data];
-        [self.imageCache storeObject:image withName:[self cacheKeyForPhotoAtIndex:photoIndex]];
-        [self.photoScrubberView didLoadThumbnail:image atIndex:photoIndex];
+    NSURLRequest *request = [NSURLRequest requestWithURL:mediaContent.URL];
+    AFImageRequestOperation *operation = [AFImageRequestOperation
+                                        imageRequestOperationWithRequest:request success:^(UIImage *image) {
+                                        [self.imageCache storeObject:image withName:[self cacheKeyForPhotoAtIndex:photoIndex]];
+                                        [self.photoScrubberView didLoadThumbnail:image atIndex:photoIndex];
     }];
-    
-    [self.queue addOperation:loadOp];
+    [operation start];
 }
 
 
