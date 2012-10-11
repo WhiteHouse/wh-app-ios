@@ -159,6 +159,7 @@
 		52FCB72415B99FD100B76924 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 52FCB72315B99FD100B76924 /* play.png */; };
 		52FCB73515B9A21200B76924 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 52FCB72815B9A21200B76924 /* FBDialog.bundle */; };
 		52FCB73615B9A21200B76924 /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52FCB72E15B9A21200B76924 /* libfacebook_ios_sdk.a */; };
+		DAC1EA97162680E100B38871 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC1EA96162680E100B38871 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -514,6 +515,7 @@
 		52FCB73215B9A21200B76924 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
 		52FCB73315B9A21200B76924 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		52FCB73415B9A21200B76924 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		DAC1EA96162680E100B38871 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -711,6 +713,7 @@
 				5232EC9515C6239F004CA89C /* Default-Portrait@2x.png */,
 				5232EC9615C6239F004CA89C /* Default.png */,
 				5232EC9715C6239F004CA89C /* Default@2x.png */,
+				DAC1EA96162680E100B38871 /* Default-568h@2x.png */,
 			);
 			name = "Launch Images";
 			sourceTree = "<group>";
@@ -1371,6 +1374,7 @@
 				5266E07315C9D308009E37C7 /* live-feed-zero-state@2x.png in Resources */,
 				52FAEF0715D0BFC7004E514E /* Icon-Small.png in Resources */,
 				523C27E815D576FD002E093A /* youtube.html in Resources */,
+				DAC1EA97162680E100B38871 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
