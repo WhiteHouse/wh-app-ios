@@ -11,7 +11,7 @@
 		5208905F15A77883004CD40F /* NSArray+WHAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5208905E15A77883004CD40F /* NSArray+WHAdditions.m */; };
 		5208906215A78209004CD40F /* WHLiveBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5208906115A78209004CD40F /* WHLiveBarController.m */; };
 		520A463A15C828C100547BAE /* AppConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 520A463915C828C100547BAE /* AppConfig.plist */; };
-		5216259115FAAA1400CB8B59 /* libUAirship-1.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5216259015FAAA1400CB8B59 /* libUAirship-1.3.2.a */; };
+		5216259115FAAA1400CB8B59 /* libUAirship-1.3.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5216259015FAAA1400CB8B59 /* libUAirship-1.3.3.a */; };
 		5221B01A157E44FE00265F1B /* NimbusWebController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5221B019157E44FE00265F1B /* NimbusWebController.bundle */; };
 		5221B031157E466600265F1B /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 5221B01E157E466500265F1B /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5221B032157E466600265F1B /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5221B021157E466500265F1B /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -159,6 +159,7 @@
 		52FCB72415B99FD100B76924 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 52FCB72315B99FD100B76924 /* play.png */; };
 		52FCB73515B9A21200B76924 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 52FCB72815B9A21200B76924 /* FBDialog.bundle */; };
 		52FCB73615B9A21200B76924 /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52FCB72E15B9A21200B76924 /* libfacebook_ios_sdk.a */; };
+		DAC1EA97162680E100B38871 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC1EA96162680E100B38871 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -169,7 +170,7 @@
 		5208906015A78209004CD40F /* WHLiveBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHLiveBarController.h; sourceTree = "<group>"; };
 		5208906115A78209004CD40F /* WHLiveBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHLiveBarController.m; sourceTree = "<group>"; };
 		520A463915C828C100547BAE /* AppConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfig.plist; sourceTree = "<group>"; };
-		5216259015FAAA1400CB8B59 /* libUAirship-1.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libUAirship-1.3.2.a"; path = "libs/Airship/libUAirship-1.3.2.a"; sourceTree = "<group>"; };
+		5216259015FAAA1400CB8B59 /* libUAirship-1.3.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libUAirship-1.3.3.a"; path = "libs/Airship/libUAirship-1.3.3.a"; sourceTree = "<group>"; };
 		5221B019157E44FE00265F1B /* NimbusWebController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = NimbusWebController.bundle; path = libs/nimbus/src/webcontroller/resources/NimbusWebController.bundle; sourceTree = SOURCE_ROOT; };
 		5221B01D157E466500265F1B /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "libs/asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		5221B01E157E466500265F1B /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "libs/asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
@@ -385,7 +386,7 @@
 		5265E79615B8B09B00173B1C /* UASubscriptionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UASubscriptionManager.h; sourceTree = "<group>"; };
 		5265E79715B8B09B00173B1C /* UASubscriptionObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UASubscriptionObserver.h; sourceTree = "<group>"; };
 		5265E79815B8B09B00173B1C /* UASubscriptionProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UASubscriptionProduct.h; sourceTree = "<group>"; };
-		5265E79915B8B09B00173B1C /* libUAirship-1.2.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libUAirship-1.2.2.a"; sourceTree = "<group>"; };
+		5265E79915B8B09B00173B1C /* libUAirship-1.3.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libUAirship-1.3.3.a"; sourceTree = "<group>"; };
 		5265E79A15B8B09B00173B1C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		5265E79B15B8B09B00173B1C /* README.rst */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.rst; sourceTree = "<group>"; };
 		5265E8AA15B8B13700173B1C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -514,6 +515,7 @@
 		52FCB73215B9A21200B76924 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
 		52FCB73315B9A21200B76924 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		52FCB73415B9A21200B76924 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		DAC1EA96162680E100B38871 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -521,7 +523,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5216259115FAAA1400CB8B59 /* libUAirship-1.3.2.a in Frameworks */,
+				5216259115FAAA1400CB8B59 /* libUAirship-1.3.3.a in Frameworks */,
 				5265E8AF15B8B15200173B1C /* StoreKit.framework in Frameworks */,
 				5265E8AD15B8B13D00173B1C /* CoreTelephony.framework in Frameworks */,
 				5265E8AB15B8B13700173B1C /* CoreLocation.framework in Frameworks */,
@@ -711,6 +713,7 @@
 				5232EC9515C6239F004CA89C /* Default-Portrait@2x.png */,
 				5232EC9615C6239F004CA89C /* Default.png */,
 				5232EC9715C6239F004CA89C /* Default@2x.png */,
+				DAC1EA96162680E100B38871 /* Default-568h@2x.png */,
 			);
 			name = "Launch Images";
 			sourceTree = "<group>";
@@ -736,7 +739,7 @@
 		5235CC17155C5FF10095163C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5216259015FAAA1400CB8B59 /* libUAirship-1.3.2.a */,
+				5216259015FAAA1400CB8B59 /* libUAirship-1.3.3.a */,
 				5265E8AE15B8B15200173B1C /* StoreKit.framework */,
 				5265E8AC15B8B13D00173B1C /* CoreTelephony.framework */,
 				5265E8AA15B8B13700173B1C /* CoreLocation.framework */,
@@ -830,7 +833,7 @@
 				5265E73B15B8B09B00173B1C /* Common */,
 				5265E75715B8B09B00173B1C /* External */,
 				5265E77815B8B09B00173B1C /* Library */,
-				5265E79915B8B09B00173B1C /* libUAirship-1.2.2.a */,
+				5265E79915B8B09B00173B1C /* libUAirship-1.3.3.a */,
 				5265E79A15B8B09B00173B1C /* LICENSE */,
 				5265E79B15B8B09B00173B1C /* README.rst */,
 			);
@@ -1371,6 +1374,7 @@
 				5266E07315C9D308009E37C7 /* live-feed-zero-state@2x.png in Resources */,
 				52FAEF0715D0BFC7004E514E /* Icon-Small.png in Resources */,
 				523C27E815D576FD002E093A /* youtube.html in Resources */,
+				DAC1EA97162680E100B38871 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1594,6 +1598,7 @@
 					"\"${SDK_DIR}/usr/include/libxml2\"",
 					"\"$(SRCROOT)/libs/Airship\"",
 					"\"$(SRCROOT)/libs/facebook/lib/facebook-ios-sdk\"",
+					"\"$(SRCROOT)/libs/Google Analytics\"",
 				);
 				INFOPLIST_FILE = "WhiteHouseApp/WhiteHouseApp-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -1621,6 +1626,7 @@
 					"\"${SDK_DIR}/usr/include/libxml2\"",
 					"\"$(SRCROOT)/libs/Airship\"",
 					"\"$(SRCROOT)/libs/facebook/lib/facebook-ios-sdk\"",
+					"\"$(SRCROOT)/libs/Google Analytics\"",
 				);
 				INFOPLIST_FILE = "WhiteHouseApp/WhiteHouseApp-Info.plist";
 				LIBRARY_SEARCH_PATHS = (

@@ -42,6 +42,7 @@
 #import "WHVideoViewController.h"
 #import "WHRemoteFile.h"
 #import "UATagUtils.h"
+#import "UAPush.h"
 
 
 @interface WHAppDelegate ()
@@ -270,13 +271,12 @@
                                                 UATagTypeLanguage |
                                                 UATagTypeCountry |
                                                 UATagTypeDeviceType)];
-    // ... and add some of our own
-    NSMutableArray *mutableTags = [baseTags mutableCopy];
-    // specify the new version of the app, so we can send appropriate notifications
-    [mutableTags addObject:@"app_v2"];
+
+    // and specify the new version of the app, so we can send appropriate notifications
+    NSArray *tags = [baseTags arrayByAddingObject:@"app_v2"];
+    [UAPush shared].tags = tags;
     
-    NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:mutableTags, @"tags", nil];
-    [[UAirship shared] registerDeviceToken:deviceToken withExtraInfo:info];
+    [[UAPush shared] registerDeviceToken:deviceToken];
 }
 
 
