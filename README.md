@@ -74,6 +74,26 @@ To install Urban Airship, download the SDK and place the entire
 To install Google Analytics, download the SDK and place the entire
 `Google Analytics SDK` directory inside of `libs/`.
 
+### Feeds
+
+The app's content is pulled in from RSS feeds.
+
+A thumbnail image is displayed in feed list views when the source 
+feed <item> has a <media:thumbnail> element. The "width" attribute 
+is required; the parser currently ignores thumbnail elements with no width. 
+
+Example:
+
+    <item>
+         <media:thumbnail url="http://www.whitehouse.gov/example-image-320px.jpg" width="320"/>
+         <media:thumbnail url="http://www.whitehouse.gov/example-image-640px.jpg" width="640"/>
+    </item>
+
+The optimal size for display is chosen depending on the context (e.g. 640px 
+for article feeds on the iPhone 4, or ~70px for photo gallery thumbnails on the 
+iPhone 3GS) and screen density.
+
+
 NOTE: Setting up the application and configuring it for use in your
 organization's context requires iOS development experience. The
 application ships with a similar design to what is used in the White
