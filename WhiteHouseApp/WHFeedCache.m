@@ -33,6 +33,7 @@
 #import "WHFeedCache.h"
 
 #import "WHFeed.h"
+#import "WHRemoteFile.h"
 
 #define FEED_ITEM_TABLE "feed_items"
 #define FAVORITES_TABLE "favorites"
@@ -87,7 +88,7 @@ static WHFeedCache *sharedCache;
 }
 
 
-- (NSString *)databaseFilePath
+- (NSURL *)databaseFileURL
 {
     NSFileManager *fileManager = [[NSFileManager alloc] init];
     NSArray *paths = [fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask];
@@ -95,15 +96,20 @@ static WHFeedCache *sharedCache;
     if (![fileManager fileExistsAtPath:directoryURL.path]) {
         [fileManager createDirectoryAtURL:directoryURL withIntermediateDirectories:YES attributes:nil error:nil];
     }
-    return [[directoryURL URLByAppendingPathComponent:@"feed_cache.sqlite"] path];
+    return [directoryURL URLByAppendingPathComponent:@"feed_cache.sqlite"];
 }
 
 
 - (void)open
 {
-    NSString *path =[self databaseFilePath];
-    DebugLog(@"Opening DB at %@", path);
-    const char *db_path = [path UTF8String];
+    NSURL *fileURL =[self databaseFileURL];
+    NSError *backupExclusionError = nil;
+    if (![fileURL setResourceValue:[NSNumber numberWithBool:YES] forKey:NSURLIsExcludedFromBackupKey error:&backupExclusionError]) {
+        NSLog(@"Could not exclude DB from backup: %@", backupExclusionError.userInfo);
+    }
+    
+    DebugLog(@"Opening DB at %@", fileURL);
+    const char *db_path = [fileURL.path UTF8String];
     
     DebugLog(@"sqlite3 lib version: %s", sqlite3_libversion());
 
@@ -119,6 +125,10 @@ static WHFeedCache *sharedCache;
     // favorites table
     [self doSQL:@"CREATE TABLE IF NOT EXISTS " FAVORITES_TABLE " (guid TEXT UNIQUE);"];
     [self doSQL:@"CREATE INDEX IF NOT EXISTS index_favorite_guid ON " FAVORITES_TABLE " (guid);"];
+    
+    // clean up the DB, since we aren't caching favorites anymore
+    [self doSQL:@"DELETE FROM feed_items WHERE guid NOT IN (SELECT guid FROM favorites)"];
+    [self doSQL:@"VACUUM"];
 }
 
 
@@ -203,7 +213,9 @@ static WHFeedCache *sharedCache;
     return result;
 }
 
-
+/**
+ * Keep this for now, even though true feed caches have moved to simple files
+ */
 - (NSSet *)favoritedItemsForURL:(NSURL *)feedURL
 {
     __block NSSet *result;
@@ -219,27 +231,5 @@ static WHFeedCache *sharedCache;
     });
     return result;
 }
-
-
-- (NSSet *)cachedItemsForURL:(NSURL *)feedURL
-{
-    __block NSSet *result;
-    dispatch_sync(_queue, ^{
-        sqlite3_stmt *stmt;
-        char *sql = "SELECT data FROM feed_items WHERE feed_url = ? ORDER BY pubDate DESC LIMIT " SELECT_LIMIT;
-        sqlite3_prepare_v2(_db, sql, -1, &stmt, NULL);
-        sqlite3_bind_text(stmt, 1, [[feedURL absoluteString] UTF8String], -1, SQLITE_TRANSIENT);
-        
-        NSTimeInterval sixMonths = 60 * 60 * 24 * 30 * 6;
-        NSTimeInterval cutoff = [[NSDate dateWithTimeIntervalSinceNow:-sixMonths] timeIntervalSince1970];
-        sqlite3_bind_int(stmt, 2, cutoff);
-        
-        result = [[self class] feedItemsFromStatement:stmt];
-        
-        sqlite3_finalize(stmt);
-    });
-    return result;
-}
-
 
 @end

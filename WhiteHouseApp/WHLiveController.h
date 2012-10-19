@@ -45,7 +45,7 @@ extern NSString * const WHLiveEventsChangedLiveItemsKey;
 
 @property (nonatomic, strong) WHFeed *feed;
 
-- (id)initWithFeed:(WHFeed *)feed;
+- (id)initWithFeed:(WHFeed *)feed updateFrequency:(NSInteger)seconds;
 - (void)startUpdating;
 - (void)stopUpdating;
 

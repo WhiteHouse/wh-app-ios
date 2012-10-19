@@ -49,6 +49,8 @@ static CGFloat padding = 10;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self updateThumbnails];
+    [self.tableView reloadData];
 }
 
 
@@ -57,6 +59,21 @@ static CGSize idealThumbSize;
 + (void)initialize
 {
     idealThumbSize = CGSizeMake(150, 100);
+}
+
+
+- (void)calculateThumbnailSizes {
+    DebugLog(@"table view bounds: %@", NSStringFromCGRect(self.tableView.bounds));
+    CGFloat w = self.tableView.bounds.size.width;
+    _thumbnailsPerRow = (int)floor(w / (idealThumbSize.width + padding));
+    DebugLog(@"thumbnails per row: %i", _thumbnailsPerRow);
+    
+    CGFloat totalPadding = (_thumbnailsPerRow + 1) * padding;
+    // available space / ideal space
+    CGFloat ratio = (w - totalPadding) / (_thumbnailsPerRow * idealThumbSize.width);
+    _thumbnailSize = CGSizeApplyAffineTransform(idealThumbSize, CGAffineTransformMakeScale(ratio, ratio));
+    
+    DebugLog(@"new thumbnail size: %@", NSStringFromCGSize(_thumbnailSize));
 }
 
 
@@ -72,19 +89,10 @@ static CGSize idealThumbSize;
     self.tableView.pullToRefreshView.activityIndicatorViewStyle  = UIActivityIndicatorViewStyleWhite;
     self.tableView.pullToRefreshView.lastUpdatedDate = self.feed.lastUpdatedDate;
     
-    
-    CGFloat w = self.tableView.bounds.size.width;
-    _thumbnailsPerRow = (int)floor(w / (idealThumbSize.width + padding));
-    
-    CGFloat totalPadding = (_thumbnailsPerRow + 1) * padding;
-    // available space / ideal space
-    CGFloat ratio = (w - totalPadding) / (_thumbnailsPerRow * idealThumbSize.width);
-    _thumbnailSize = CGSizeApplyAffineTransform(idealThumbSize, CGAffineTransformMakeScale(ratio, ratio));
+    [self calculateThumbnailSizes];
     
     WHTrendyView *bg = [[WHTrendyView alloc] initWithFrame:self.view.bounds];
     bg.backgroundColor = [UIColor colorWithHue:(210.0 / 365.0) saturation:0.2 brightness:0.5 alpha:1.0];
-    bg.startColor = [UIColor colorWithWhite:0.0 alpha:0.6];
-    bg.endColor = [UIColor colorWithWhite:0.0 alpha:0.2];
     bg.autoresizingMask = UIViewAutoresizingFlexibleDimensions;
     [self.view addSubview:bg];
     
@@ -154,6 +162,14 @@ static CGSize idealThumbSize;
 }
 
 
+/**
+ * Return frame for thumbnail at given column
+ */
+- (CGRect)frameForThumbnail:(int)col {
+    return CGRectMake(((col + 1) * padding) + (col * _thumbnailSize.width), padding, _thumbnailSize.width, _thumbnailSize.height);
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static int imageTag = 1000;
@@ -162,22 +178,22 @@ static CGSize idealThumbSize;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-        
-        for (int col = 0; col < _thumbnailsPerRow; col++) {
-            CGRect thumbnailFrame = CGRectMake(((col + 1) * padding) + (col * _thumbnailSize.width), padding, _thumbnailSize.width, _thumbnailSize.height);
-            WHThumbnailView *thumbnailView = [[WHThumbnailView alloc] initWithFrame:thumbnailFrame];
-            [cell.contentView addSubview:thumbnailView];
-            
-            thumbnailView.tag = imageTag | col;
-            
-            UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
-            [thumbnailView addGestureRecognizer:tapper];
-        }
     }
     
     for (int col = 0; col < _thumbnailsPerRow; col++) {
         WHFeedItem *item = [self feedItemForRow:indexPath.row column:col];
         WHThumbnailView *imageView = (WHThumbnailView *)[cell.contentView viewWithTag:(imageTag | col)];
+        
+        if (imageView == nil) {
+            imageView = [[WHThumbnailView alloc] initWithFrame:[self frameForThumbnail:col]];
+            [cell.contentView addSubview:imageView];
+            imageView.tag = imageTag | col;
+            UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+            [imageView addGestureRecognizer:tapper];
+        } else {
+            // set the frame to handle resizing after rotation
+            imageView.frame = [self frameForThumbnail:col];
+        }
         imageView.feedItem = item;
     }
     
@@ -204,6 +220,29 @@ static CGSize idealThumbSize;
 {
     WHThumbnailView *thumbnailView = (WHThumbnailView *)gestureRecognizer.view;
     [self displayFeedItem:thumbnailView.feedItem];
+}
+
+
+/**
+ * Update all visible thumbnails with the correct frame, to handle UI rotation
+ */
+- (void)updateThumbnails {
+    [self calculateThumbnailSizes];
+    
+    for (UITableViewCell *cell in self.tableView.visibleCells) {
+        int col = 0;
+        for (UIView *thumbnail in cell.contentView.subviews) {
+            DebugLog(@"col %i, thumbnail %@", col, thumbnail);
+            thumbnail.frame = [self frameForThumbnail:col++];
+        }
+    }
+}
+
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self updateThumbnails];
+    [self.tableView reloadData];
 }
 
 

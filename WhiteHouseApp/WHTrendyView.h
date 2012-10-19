@@ -36,10 +36,6 @@
  * Displays a radial gradient with a subtle texture over a background color.
  */
 @interface WHTrendyView : UIView {
-    CGImageRef _noise;
 }
-
-@property (nonatomic, strong) UIColor *startColor;
-@property (nonatomic, strong) UIColor *endColor;
 
 @end

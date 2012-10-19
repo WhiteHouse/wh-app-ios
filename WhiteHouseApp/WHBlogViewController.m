@@ -154,7 +154,7 @@ NSString* RelativeDateString(NSDate *date)
 
 - (CGSize)sizeForTitleText:(NSString *)text
 {
-    CGFloat titleWidth = self.view.bounds.size.width - (CELL_PADDING + CELL_PADDING_RIGHT);
+    CGFloat titleWidth = self.tableView.bounds.size.width - (CELL_PADDING + CELL_PADDING_RIGHT);
     return [text sizeWithFont:[WHStyle headingFontWithSize:TITLE_FONT_SIZE] constrainedToSize:CGSizeMake(titleWidth, 1000) lineBreakMode:UILineBreakModeWordWrap];
 }
 
@@ -220,12 +220,12 @@ static NSString *CellIdentifier = @"PhotoCell";
     [imageView sizeToFit];
     imageView.tag = TAG_IMAGE;
     imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.clipsToBounds = YES;
     imageView.delegate = self;
     cell.backgroundView = imageView;
     
     CGRect barFrame = CGRectMake(0, PHOTO_V_PADDING + PHOTO_HEIGHT - ROW_HEIGHT, 320, ROW_HEIGHT);
     UIView *blackBar = [[UIView alloc] initWithFrame:barFrame];
-    blackBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     blackBar.tag = TAG_LABEL_CONTAINER;
     blackBar.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.75];
     [cell.contentView addSubview:blackBar];
@@ -234,7 +234,7 @@ static NSString *CellIdentifier = @"PhotoCell";
     cell.selectedBackgroundView.backgroundColor = [UIColor colorWithHue:(211.0 / 360.0) saturation:0.99 brightness:0.93 alpha:0.8];
     
     DTCustomColoredAccessory *arrow = [DTCustomColoredAccessory accessoryWithColor:[UIColor whiteColor]];
-    arrow.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
+    arrow.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
     CGRect arrowFrame = arrow.frame;
     arrowFrame.origin = CGPointMake(297, 30);
     arrow.frame = arrowFrame;
@@ -318,7 +318,7 @@ static NSString *CellIdentifier = @"PhotoCell";
     
     UIView *labelContaier = [cell viewWithTag:TAG_LABEL_CONTAINER];
     CGFloat containerHeight = TITLE_Y + titleSize.height + CELL_PADDING;
-    labelContaier.frame = CGRectMake(0, PHOTO_ROW_HEIGHT - containerHeight, 320, containerHeight);
+    labelContaier.frame = CGRectMake(0, PHOTO_ROW_HEIGHT - containerHeight, cell.contentView.bounds.size.width, containerHeight);
     
     UILabel *dateView = (UILabel *)[cell viewWithTag:TAG_DATE];
     dateView.text = RelativeDateString(item.pubDate);
@@ -345,6 +345,7 @@ static NSString *CellIdentifier = @"PhotoCell";
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:TAG_TITLE];
     CGSize titleSize = [self sizeForTitleText:item.title];
     titleLabel.frame = CGRectMake(CELL_PADDING, TITLE_Y, titleSize.width, titleSize.height);
+    titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     titleLabel.text = item.title;
     
     UILabel *dateView = (UILabel *)[cell viewWithTag:TAG_DATE];
@@ -401,10 +402,16 @@ static NSString *CellIdentifier = @"PhotoCell";
 }
 
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    DebugLog(@"blog view should rotate?");
-    return toInterfaceOrientation == UIInterfaceOrientationPortrait;
+    [self.tableView reloadData];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 

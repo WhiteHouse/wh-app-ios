@@ -65,8 +65,7 @@
     [super viewDidLoad];
     
     WHTrendyView *gradient = [[WHTrendyView alloc] initWithFrame:self.view.bounds];
-    gradient.startColor = [UIColor colorWithWhite:0.7 alpha:1.0];
-    gradient.endColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+    gradient.backgroundColor = [UIColor whiteColor];
     gradient.autoresizingMask = UIViewAutoresizingFlexibleDimensions;
     [self.view addSubview:gradient];
     [self.view bringSubviewToFront:self.tableView];

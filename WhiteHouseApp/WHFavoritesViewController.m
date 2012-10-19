@@ -33,6 +33,7 @@
 #import "WHFavoritesViewController.h"
 
 #import "UIViewController+WHFeedItemPresentation.h"
+#import "WHPhotoViewController.h"
 #import "WHFeedCollection.h"
 #import "WHTrendyView.h"
 #import "WHFeedCache.h"
@@ -59,6 +60,7 @@
     NSMutableDictionary *favoritesDict = [NSMutableDictionary dictionary];
     for (WHFeed *feed in feeds) {
         NSSet *favorites = [feed favorites];
+        DebugLog(@"Feed %@ has %i favorites", feed.feedURL, favorites.count);
         if ([favorites count]) {
             [feedsWithFavorites addObject:feed];
             [favoritesDict setObject:favorites forKey:feed.feedURL];
@@ -90,14 +92,15 @@
     self.tableView = tableView;
     
     WHTrendyView *zeroState = [[WHTrendyView alloc] initWithFrame:self.view.bounds];
-    zeroState.startColor = [UIColor colorWithWhite:0.7 alpha:1.0];
-    zeroState.endColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+    zeroState.backgroundColor = [UIColor whiteColor];
+    zeroState.autoresizingMask = UIViewAutoresizingFlexibleDimensions;
     [self.view addSubview:zeroState];
     self.zeroStateView = zeroState;
     
     UIImageView *messageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"favorites-zero-state"]];
     messageView.center = zeroState.center;
     messageView.frame = CGRectOffset(messageView.frame, 0, 0.5);
+    messageView.autoresizingMask = UIViewAutoresizingFlexibleMargins;
     [zeroState addSubview:messageView];
     
     DebugLog(@"view bounds = %@", NSStringFromCGRect(self.view.bounds));
@@ -125,12 +128,6 @@
     }
     
     [self.tableView reloadData];
-}
-
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 
@@ -216,7 +213,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WHFeedItem *item = [self favoriteForRowAtIndexPath:indexPath];
-    [self displayFeedItem:item];
+    if (item.mediaContents.count) {
+        // handle the image selection here
+        WHPhotoViewController *photoView = [[WHPhotoViewController alloc] initWithNibName:nil bundle:nil];
+        photoView.feedItems = [self favesForSection:indexPath.section];
+        [self.navigationController pushViewController:photoView animated:YES];
+        [photoView.photoAlbumView moveToPageAtIndex:[photoView.feedItems indexOfObject:item] animated:NO];
+        photoView.toolbarIsTranslucent = YES;
+        photoView.hidesChromeWhenScrolling = YES;
+        photoView.chromeCanBeHidden = YES;
+    } else {
+        [self displayFeedItem:item];
+    }
 }
 
 

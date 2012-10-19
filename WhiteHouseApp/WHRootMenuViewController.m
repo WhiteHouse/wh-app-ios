@@ -129,8 +129,6 @@
     
     WHTrendyView *bg = [[WHTrendyView alloc] initWithFrame:self.view.bounds];
     bg.backgroundColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-    bg.startColor = [UIColor colorWithWhite:0.0 alpha:0.15];
-    bg.endColor = [UIColor colorWithWhite:0.0 alpha:0.0];
     bg.autoresizingMask = UIViewAutoresizingFlexibleDimensions;
     
     UIImageView *seal = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-branding"]];

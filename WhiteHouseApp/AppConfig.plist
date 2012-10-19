@@ -34,5 +34,7 @@
 	<string>//p | //div[not(starts-with(@class, &apos;field&apos;))]</string>
 	<key>ArticleBaseURL</key>
 	<string>http://www.example.com/</string>
+	<key>LiveFeedUpdateFrequency</key>
+	<integer>60</integer>
 </dict>
 </plist>

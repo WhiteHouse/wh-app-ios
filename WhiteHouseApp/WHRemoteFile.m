@@ -43,7 +43,9 @@
 {
     if ((self = [super init])) {
         _queue = dispatch_queue_create(NSStringFromClass([self class]).UTF8String, NULL);
-        self.bundlePath = [[NSBundle mainBundle] pathForResource:name ofType:extension];
+        if (name && extension) {
+            self.bundlePath = [[NSBundle mainBundle] pathForResource:name ofType:extension];
+        }
         self.remoteURL = remoteURL;
     }
     
@@ -54,7 +56,7 @@
 - (NSString *)cacheDirectoryPath
 {
     NSFileManager *fm = [[NSFileManager alloc] init];
-    NSArray *appSupportURLs = [fm URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask];
+    NSArray *appSupportURLs = [fm URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask];
     NSURL *directoryURL = [appSupportURLs objectAtIndex:0];
     NSString *directoryPath = [directoryURL path];
     if (![fm fileExistsAtPath:directoryPath]) {
@@ -88,8 +90,10 @@
     NSString *cachePath = [self localCachePath];
     if ([fm fileExistsAtPath:cachePath]) {
         return [NSData dataWithContentsOfFile:cachePath];
-    } else {
+    } else if([fm fileExistsAtPath:self.bundlePath]) {
         return [NSData dataWithContentsOfFile:self.bundlePath];
+    } else {
+        return nil;
     }
 }
 
@@ -97,10 +101,12 @@
 - (void)updateWithValidator:(ValidatorBlock)validator
 {
     dispatch_async(_queue, ^{
+        NINetworkActivityTaskDidStart();
         NSData *data = [NSData dataWithContentsOfURL:self.remoteURL];
         if (data && validator(data)) {
             [data writeToFile:[self localCachePath] atomically:YES];
         }
+        NINetworkActivityTaskDidFinish();
     });
 }
 

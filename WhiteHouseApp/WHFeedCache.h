@@ -55,11 +55,6 @@
  */
 + (WHFeedCache *)sharedCache;
 
-/**
- * Return all feed items for the given URL (blocking)
- */
-- (NSSet *)cachedItemsForURL:(NSURL *)feedURL;
-
 - (NSSet *)favoritedItemsForURL:(NSURL *)feedURL;
 
 /**

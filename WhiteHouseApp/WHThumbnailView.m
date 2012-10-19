@@ -37,6 +37,7 @@
 
 @interface WHThumbnailView ()
 @property (nonatomic, strong) NINetworkImageView *imageView;
+@property (nonatomic, strong) CAGradientLayer *gradient;
 @end
 
 
@@ -44,31 +45,19 @@
 
 @synthesize feedItem = _feedItem;
 @synthesize imageView = _imageView;
+@synthesize gradient = _gradient;
 
 - (id)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
         self.backgroundColor = [UIColor whiteColor];
         
-        CALayer *layer = self.layer;
-        
-        // add a gradient sublayer to the layer
-        CAGradientLayer *gradient = [CAGradientLayer layer];
-        gradient.frame = self.bounds;
-        gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithWhite:0.9 alpha:1.0] CGColor], (id)[[UIColor whiteColor] CGColor], nil];
-        [layer insertSublayer:gradient atIndex:0];
-        
-        // set up the drop shadow
-        layer.shadowOffset = CGSizeMake(0, 3.0);
-        layer.shadowOpacity = 0.2;
-        layer.shadowRadius = 3.0;
-        CGPathRef shadowPath = CGPathCreateWithRect(layer.bounds, NULL);
-        layer.shadowPath = shadowPath;
-        CGPathRelease(shadowPath);
+        [self configureEffects];
         
         self.imageView = [[NINetworkImageView alloc] initWithFrame:CGRectInset(self.bounds, 6, 6)];
         self.imageView.backgroundColor = [UIColor grayColor];
         self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.imageView.autoresizingMask = UIViewAutoresizingFlexibleDimensions;
         
         [self addSubview:self.imageView];
     }
@@ -77,9 +66,39 @@
 }
 
 
+- (void)configureEffects
+{
+    CALayer *layer = self.layer;
+    
+    // add a gradient sublayer to the layer
+    if (self.gradient == nil) {
+        self.gradient = [CAGradientLayer layer];
+        [layer insertSublayer:self.gradient atIndex:0];
+    }
+    self.gradient.frame = self.bounds;
+    self.gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithWhite:0.9 alpha:1.0] CGColor], (id)[[UIColor whiteColor] CGColor], nil];
+    
+    // set up the drop shadow
+    layer.shadowOffset = CGSizeMake(0, 3.0);
+    layer.shadowOpacity = 0.2;
+    layer.shadowRadius = 3.0;
+    CGPathRef shadowPath = CGPathCreateWithRect(layer.bounds, NULL);
+    layer.shadowPath = shadowPath;
+    CGPathRelease(shadowPath);
+}
+
+
+- (void)layoutSubviews
+{
+    [self configureEffects];
+}
+
+
 - (void)setFeedItem:(WHFeedItem *)feedItem
 {
     _feedItem = feedItem;
+    self.accessibilityLabel = feedItem.title;
+    self.isAccessibilityElement = YES;
     self.imageView.image = nil;    
     
     if (feedItem) {

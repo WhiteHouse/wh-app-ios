@@ -220,12 +220,6 @@
 }
 
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    return NIIsSupportedOrientation(toInterfaceOrientation);
-}
-
-
 #pragma mark Scrubber methods
 
 

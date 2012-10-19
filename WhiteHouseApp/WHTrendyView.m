@@ -34,52 +34,22 @@
 
 @implementation WHTrendyView
 
-@synthesize startColor = _startColor;
-@synthesize endColor  = _endColor;
-
-- (void)dealloc
-{
-    if (_noise != NULL) {
-        CGImageRelease(_noise);
+- (id)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        UIView *vignette = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"vignette"]];
+        vignette.contentMode = UIViewContentModeScaleToFill;
+        vignette.autoresizingMask = UIViewAutoresizingFlexibleDimensions;
+        vignette.frame = frame;
+        vignette.alpha = 0.1;
+        [self addSubview:vignette];
+        
+        UIView *noiseView = [[UIView alloc] initWithFrame:frame];
+        noiseView.autoresizingMask = UIViewAutoresizingFlexibleDimensions;
+        noiseView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"noise800"]];
+        noiseView.alpha = 0.5;
+        [self addSubview:noiseView];
     }
-}
-
-- (CGImageRef)noise
-{
-    if (_noise == NULL) {
-        CGSize size = self.frame.size;
-        int bytes = size.width * size.height;
-        uint8_t *pixels = malloc(sizeof(uint8_t) * bytes);
-        SecRandomCopyBytes(kSecRandomDefault, bytes, pixels);
-        CGColorSpaceRef gray = CGColorSpaceCreateDeviceGray();
-        CGContextRef ctx = CGBitmapContextCreate(pixels, size.width, size.height, 8, size.width, gray, 0);
-        CGImageRef img = CGBitmapContextCreateImage(ctx);
-        CGContextRelease(ctx);
-        CGColorSpaceRelease(gray);
-        free(pixels);
-        _noise = img;
-    }
-    return _noise;
-}
-
-- (void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-    CGContextRef c = UIGraphicsGetCurrentContext();
-    CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
-    const void* colorArray[2] = {[self.startColor CGColor], [self.endColor CGColor]};
-    CFArrayRef colors = CFArrayCreate(NULL, colorArray, 2, NULL);
-    const CGFloat locations[2] = {0.0, 1.0};
-    CGGradientRef gradient = CGGradientCreateWithColors(rgb, colors, locations);
-    CGContextDrawRadialGradient(c, gradient, self.center, MAX(self.bounds.size.height, self.bounds.size.width), self.center, 0, 0);
-    CGGradientRelease(gradient);
-    CFRelease(colors);
-    CGColorSpaceRelease(rgb);
-    
-    
-    CGContextSetBlendMode(c, kCGBlendModeScreen);
-    CGContextSetAlpha(c, 0.02);
-    CGContextDrawTiledImage(c, self.frame, [self noise]);
+    return self;
 }
 
 @end

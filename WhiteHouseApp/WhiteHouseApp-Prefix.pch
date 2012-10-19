@@ -14,7 +14,6 @@
     #import "NimbusCore.h"
     #import "GANTracker.h"
     #import "UAirship.h"
-    #import "Facebook.h"
     #import "WHStyle.h"
     #import "NSArray+WHAdditions.h"
     #import "WHAppConfig.h"

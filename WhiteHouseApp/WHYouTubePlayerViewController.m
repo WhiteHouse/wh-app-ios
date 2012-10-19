@@ -128,12 +128,6 @@ static NSString *movieNotification = @"UIMoviePlayerControllerDidExitFullscreenN
 }
 
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait) || UIInterfaceOrientationIsLandscape(interfaceOrientation);
-}
-
-
 #pragma mark UIWebViewDelegate methods
 
 

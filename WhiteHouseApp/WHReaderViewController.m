@@ -60,6 +60,13 @@
 }
 
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self sizePanels];
+}
+
+
 - (void)viewDidAppear:(BOOL)animated
 {
     if (self.pressToShare) {
@@ -72,6 +79,7 @@
 {
     [super viewDidLoad];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
     
     [self.tableView addPullToRefreshWithActionHandler:^{
         [self.feed fetch];
@@ -120,6 +128,14 @@ static CGFloat padding = 10.0;
 }
 
 
+- (CGRect)frameForPanel:(int)index {
+    CGSize panelSize = [self panelSize];
+    CGFloat totalPadding = (index + 1) * padding;
+    CGFloat offsetX = totalPadding + (index * panelSize.width);
+    return CGRectMake(offsetX, padding, panelSize.width, panelSize.height);
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:READER_CELL_IDENT];
@@ -128,12 +144,8 @@ static CGFloat padding = 10.0;
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        CGSize panelSize = [self panelSize];
-        
         for (int ii = 0; ii < READER_PANELS_PER_ROW; ii++) {
-            CGFloat totalPadding = (ii + 1) * padding;
-            CGFloat offsetX = totalPadding + (ii * panelSize.width);
-            WHReaderPanelView *panel = [[WHReaderPanelView alloc] initWithFrame:CGRectMake(offsetX, padding, panelSize.width, panelSize.height)];
+            WHReaderPanelView *panel = [[WHReaderPanelView alloc] initWithFrame:[self frameForPanel:ii]];
             panel.showAuthor = self.showAuthor;
             panel.tag = ii | READER_TAG_MASK;
             [cell.contentView addSubview:panel];
@@ -142,6 +154,7 @@ static CGFloat padding = 10.0;
     
     for (int ii = 0; ii < READER_PANELS_PER_ROW; ii++) {
         WHReaderPanelView *panel = (WHReaderPanelView *)[cell.contentView viewWithTag:ii | READER_TAG_MASK];
+        panel.frame = [self frameForPanel:ii];
         int itemIndex = (indexPath.row * READER_PANELS_PER_ROW) + ii;
         if (itemIndex < self.posts.count) {
             [panel setHidden:NO];
@@ -167,6 +180,37 @@ static CGFloat padding = 10.0;
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // do nothing
+}
+
+
+- (void)sizePanels
+{
+    for (UITableViewCell *cell in [self.tableView visibleCells]) {
+        int ii = 0;
+        for (UIView *panel in cell.contentView.subviews) {
+            panel.frame = [self frameForPanel:ii];
+            ii++;
+        }
+    }
+}
+
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    DebugLog(@"Should autorotate?");
+    return NIIsSupportedOrientation(toInterfaceOrientation);
+}
+
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self sizePanels];
+}
+
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [self.tableView reloadData];
 }
 
 

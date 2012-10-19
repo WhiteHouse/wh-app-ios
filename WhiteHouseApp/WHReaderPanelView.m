@@ -68,6 +68,8 @@
     
     NSString *dateString = [dateFormatter stringFromDate:feedItem.pubDate];
     
+    self.accessibilityLabel = [NSString stringWithFormat:@"%@, %@", feedItem.title, dateString];
+    
     if (self.showAuthor) {
         _dateLabel.text = [NSString stringWithFormat:@"%@ | %@", feedItem.creator, dateString];
     } else {
@@ -113,16 +115,14 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
+    
     if (self) {
-        self.clipsToBounds = YES;
+        self.isAccessibilityElement = YES;
         
-        // create a subtly outlined panel background
-        UIView *backgroundView = [[UIView alloc] initWithFrame:self.bounds];
-        backgroundView.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
-        CALayer *layer = backgroundView.layer;
+        self.backgroundColor = [UIColor whiteColor];
+        CALayer *layer = self.layer;
         layer.borderColor = [[UIColor colorWithWhite:0.9 alpha:1.0] CGColor];
         layer.borderWidth = 1.0;
-        [self addSubview:backgroundView];
         
         self.imageView = [[NINetworkImageView alloc] initWithFrame:self.bounds];
         self.imageView.clipsToBounds = YES;
@@ -130,18 +130,16 @@
         [self addSubview:self.imageView];
         
         self.titleLabel = [self createLabel];
-        self.titleLabel.backgroundColor = backgroundView.backgroundColor;
+        self.titleLabel.backgroundColor = self.backgroundColor;
         self.titleLabel.font = [WHStyle headingFontWithSize:20];
         self.titleLabel.textColor = [WHStyle primaryColor];
         
         self.dateLabel = [self createLabel];
-        self.dateLabel.backgroundColor = backgroundView.backgroundColor;
         self.dateLabel.font = [WHStyle detailFontWithSize:12];
         self.dateLabel.textColor = [UIColor grayColor];
         
         self.textLabel = [self createLabel];
         self.textLabel.font = [WHStyle detailFontWithSize:16];
-        self.textLabel.backgroundColor = backgroundView.backgroundColor;
     }
     return self;
 }
@@ -156,6 +154,14 @@
 
 - (void)layoutSubviews
 {
+    CALayer *layer = self.layer;
+    layer.shadowOffset = CGSizeMake(0, 3.0);
+    layer.shadowOpacity = 0.05;
+    layer.shadowRadius = 3.0;
+    CGPathRef shadowPath = CGPathCreateWithRect(self.bounds, nil);
+    layer.shadowPath = shadowPath;
+    CGPathRelease(shadowPath);
+    
     CGRect resetFrame = CGRectInset(self.bounds, PANEL_PADDING, PANEL_PADDING);
     self.titleLabel.frame = self.dateLabel.frame = self.textLabel.frame = resetFrame;
     [self.titleLabel sizeToFit];

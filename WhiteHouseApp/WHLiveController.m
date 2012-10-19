@@ -36,14 +36,23 @@
 NSString * const WHLiveEventsChangedNotification = @"WHLiveEventsChangedNotification";
 NSString * const WHLiveEventsChangedLiveItemsKey = @"liveItems";
 
+@interface WHLiveController ()
+@property (nonatomic, assign) NSInteger updateFrequency;
+@end
+
 @implementation WHLiveController
 
 @synthesize feed = _feed;
+@synthesize updateFrequency;
 
-- (id)initWithFeed:(WHFeed *)feed
+- (id)initWithFeed:(WHFeed *)feed updateFrequency:(NSInteger)seconds
 {
     if ((self = [super init])) {
         self.feed = feed;
+        if (seconds <= 0) {
+            [NSException raise:@"Invalid update interval" format:@"%i seconds", seconds];
+        }
+        self.updateFrequency = seconds;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveFeedChanged:) name:WHFeedChangedNotification object:feed];
     }
     return self;
@@ -74,7 +83,7 @@ NSString * const WHLiveEventsChangedLiveItemsKey = @"liveItems";
 - (void)startUpdating
 {
     DebugLog(@"fetching live items...");
-    [self performSelector:@selector(startUpdating) withObject:nil afterDelay:30];
+    [self performSelector:@selector(startUpdating) withObject:nil afterDelay:self.updateFrequency];
     [self.feed fetch];
 }
 

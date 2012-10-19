@@ -32,6 +32,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Facebook.h"
 #import "WHRootMenuViewController.h"
 #import "WHLiveBarController.h"
 #import "WHRevealViewController.h"

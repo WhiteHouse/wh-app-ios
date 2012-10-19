@@ -179,7 +179,8 @@
             viewController = self.liveSectionViewController;
             liveSectionMenuIndex = currentIndex;
             
-            self.liveController = [[WHLiveController alloc] initWithFeed:feed];
+            NSInteger freq = [AppConfig(@"LiveFeedUpdateFrequency") integerValue];
+            self.liveController = [[WHLiveController alloc] initWithFeed:feed updateFrequency:freq];
             self.liveBarController = [[WHLiveBarController alloc] init];
         }
         
@@ -271,11 +272,9 @@
                                                 UATagTypeLanguage |
                                                 UATagTypeCountry |
                                                 UATagTypeDeviceType)];
-
-    // and specify the new version of the app, so we can send appropriate notifications
+    // specify the new version of the app, so we can send appropriate notifications
     NSArray *tags = [baseTags arrayByAddingObject:@"app_v2"];
     [UAPush shared].tags = tags;
-    
     [[UAPush shared] registerDeviceToken:deviceToken];
 }
 
@@ -398,7 +397,7 @@
         return;
     }
     
-    NSString *fbID = AppConfig(@"FacebookAppID");
+    NSString *fbID = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"FacebookAppID"];
     if (fbID) {
         // facebook
         self.facebook = [[Facebook alloc] initWithAppId:fbID andDelegate:self];
@@ -410,6 +409,8 @@
         self.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
         self.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
     }
+    
+    self.facebook.sessionDelegate = self;
     
     [self.facebook authorize:nil];
 }

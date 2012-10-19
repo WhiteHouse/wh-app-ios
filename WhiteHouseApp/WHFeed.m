@@ -33,8 +33,14 @@
 #import "WHFeed.h"
 
 #import "WHFeedCache.h"
+#import "WHRemoteFile.h"
 
 NSString* const WHFeedChangedNotification = @"WHFeedChangedNotification";
+
+
+@interface WHFeed ()
+@property (nonatomic, strong) WHRemoteFile *cache;
+@end
 
 @implementation WHFeed
 
@@ -43,11 +49,13 @@ NSString* const WHFeedChangedNotification = @"WHFeedChangedNotification";
 @synthesize title;
 @synthesize isDatabaseBacked;
 @synthesize lastUpdatedDate;
+@synthesize cache = _cache;
 
 - (id)initWithFeedURL:(NSURL *)feedURL
 {
     if ((self = [super init])) {
         self.feedURL = feedURL;
+        self.cache = [[WHRemoteFile alloc] initWithBundleResource:nil ofType:nil remoteURL:self.feedURL];
         _queue = dispatch_queue_create("gov.eop.wh.feed_loading", NULL);
     }
     
@@ -63,55 +71,44 @@ NSString* const WHFeedChangedNotification = @"WHFeedChangedNotification";
 }
 
 
+- (NSSet *)parseFeedData:(NSData *)data
+{
+    NSMutableSet *items = [NSMutableSet set];
+    WHFeedParser *parser = [[WHFeedParser alloc] initWithFeedData:data];
+    [parser parse: ^(WHFeedItem *item) {
+        item.feedURL = self.feedURL;
+        [items addObject:item];
+    }];
+    return items;
+}
+
+
 - (void)internalFetch
 {
-    if (self.isDatabaseBacked && self.items == nil) {
-        NSSet *databaseItems = [[WHFeedCache sharedCache] cachedItemsForURL:self.feedURL];
-        if ([databaseItems count])
-        {
-            self.items = databaseItems;
+    if (self.items == nil && self.isDatabaseBacked) {
+        DebugLog(@"%@ Loading local cache", self.feedURL);
+        self.items = [self parseFeedData:[self.cache data]];
+        if (self.items.count) {
+            DebugLog(@"%@ Had %i cached items", self.feedURL, self.items.count);
             [self notify];
         }
     }
     
-    NSData *feedData = [NSData dataWithContentsOfURL:self.feedURL];
-    if (feedData) {
-        NSMutableDictionary *itemsByGUID = [NSMutableDictionary dictionaryWithCapacity:self.items.count];
-        for (WHFeedItem *item in self.items) {
-            [itemsByGUID setObject:item forKey:item.guid];
-        }
-        
-        WHFeedParser *parser = [[WHFeedParser alloc] initWithFeedData:feedData];
-        
-        // parse with block callback
-        [parser parse: ^(WHFeedItem *item) {
-            WHFeedItem *existingItem = [itemsByGUID objectForKey:item.guid];
-            if (![existingItem isEqualToFeedItem:item]) {
-                item.feedURL = self.feedURL;
-                
-                if (existingItem) {
-                    // make sure to maintain this when items are replaced
-                    item.isFavorited = existingItem.isFavorited;
-                }
-                
-                [[WHFeedCache sharedCache] saveFeedItem:item];
-                [itemsByGUID setObject:item forKey:item.guid];
-            }
-        }];
-        
-        self.items = [NSSet setWithArray:[itemsByGUID allValues]];
+    DebugLog(@"Updating from URL");
+    [self.cache updateWithValidator:^BOOL(NSData *remoteData) {
+        DebugLog(@"%@ Got feed data (%i bytes)", self.feedURL, remoteData.length);
+        self.items = [self parseFeedData:remoteData];
+        self.lastUpdatedDate = [NSDate date];
         [self notify];
-    }
+        return self.isDatabaseBacked;
+    }];
 }
 
 
 - (void)fetch
 {
-    self.lastUpdatedDate = [NSDate date];
     dispatch_async(_queue, ^{
-        NINetworkActivityTaskDidStart();
         [self internalFetch];
-        NINetworkActivityTaskDidFinish();
     });
 }
 

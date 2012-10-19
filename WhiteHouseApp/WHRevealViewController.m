@@ -37,6 +37,7 @@
 @interface WHRevealViewController ()
 @property (nonatomic, strong) UIView *contentContainerView;
 @property (nonatomic, strong) UIView *contentShieldView;
+@property (nonatomic, assign) BOOL fullscreen;
 @end
 
 @implementation WHRevealViewController
@@ -66,15 +67,20 @@
 
 - (void)setMenuViewController:(UIViewController *)menuViewController
 {
-    _menuViewController = menuViewController;
+    if (menuViewController == _menuViewController) {
+        return;
+    }
     
+    [_menuViewController removeFromParentViewController];
+    [_menuViewController.view removeFromSuperview];
+    _menuViewController = menuViewController;
     [self addChildViewController:menuViewController];
     
     UIView *menuView = self.menuViewController.view;
     CGRect bounds = self.view.bounds;
     bounds.size.width = [self menuWidth];
     menuView.frame = bounds;
-    menuView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin;
+    menuView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:menuView];
     
     [menuViewController didMoveToParentViewController:self];
@@ -82,20 +88,24 @@
 
 - (void)setContentViewController:(UIViewController *)contentViewController
 {
-    // get the old view, if any, and remove it
-    UIView *oldContentView = self.contentViewController.view;
-    [oldContentView removeFromSuperview];
+    if (contentViewController == _contentViewController) {
+        return;
+    }
     
-    // actually set it
+    // remove the old view
+    [_contentViewController removeFromParentViewController];
+    [_contentViewController.view removeFromSuperview];
+    
     _contentViewController = contentViewController;
     
+    [contentViewController willMoveToParentViewController:self];
     [self addChildViewController:contentViewController];
     
     // this will load the view the first time, triggering viewDidLoad below,
     // loading the menu view first before adding the content view
     if (self.view) {
         UIView *contentView = contentViewController.view;
-        contentView.frame = (oldContentView ? oldContentView.frame : self.view.bounds);
+        contentView.frame = self.view.bounds;
         contentView.autoresizingMask = UIViewAutoresizingFlexibleDimensions;
         [self.contentContainerView addSubview:contentView];
     }
@@ -161,6 +171,14 @@
     [UIView beginAnimations:@"ShowMenu" context:nil];
     [UIView setAnimationBeginsFromCurrentState:YES];
     
+    self.fullscreen = menuVisible && wantsFullWidth;
+    
+    if (wantsFullWidth) {
+        self.menuViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    } else {
+        self.menuViewController.view.autoresizingMask = 0;
+    }
+    
     CGRect contentFrame = self.contentContainerView.frame;
     CGRect menuFrame = self.menuViewController.view.frame;
     if (menuVisible) {
@@ -204,29 +222,17 @@
     [UIView commitAnimations];
 }
 
-// Forward the following methods to the child view controllers
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    [self.menuViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [self.contentViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    return NIIsSupportedOrientation(toInterfaceOrientation);
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    [self.menuViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [self.contentViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [self.menuViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    [self.contentViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    return [self.contentViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation];
+    if (self.fullscreen) {
+        self.contentContainerView.frame = CGRectMake(self.view.bounds.size.width, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+    }
 }
 
 @end

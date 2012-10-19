@@ -10,8 +10,9 @@
 		5208905B15A775F4004CD40F /* WHLiveController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5208905A15A775F4004CD40F /* WHLiveController.m */; };
 		5208905F15A77883004CD40F /* NSArray+WHAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5208905E15A77883004CD40F /* NSArray+WHAdditions.m */; };
 		5208906215A78209004CD40F /* WHLiveBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5208906115A78209004CD40F /* WHLiveBarController.m */; };
+		5208F9BF160CEDEE00F2C4C2 /* libUAirship-1.3.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5208F9BE160CEDEE00F2C4C2 /* libUAirship-1.3.3.a */; };
+		5208F9C5160CF03500F2C4C2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5208F9C4160CF03500F2C4C2 /* Default-568h@2x.png */; };
 		520A463A15C828C100547BAE /* AppConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 520A463915C828C100547BAE /* AppConfig.plist */; };
-		5216259115FAAA1400CB8B59 /* libUAirship-1.3.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5216259015FAAA1400CB8B59 /* libUAirship-1.3.3.a */; };
 		5221B01A157E44FE00265F1B /* NimbusWebController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5221B019157E44FE00265F1B /* NimbusWebController.bundle */; };
 		5221B031157E466600265F1B /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 5221B01E157E466500265F1B /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5221B032157E466600265F1B /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5221B021157E466500265F1B /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -30,7 +31,6 @@
 		5221B04D157E5B1200265F1B /* underscore-min.js in Resources */ = {isa = PBXBuildFile; fileRef = 5221B04B157E572700265F1B /* underscore-min.js */; };
 		5222BB0E158A5B2D0073DCFA /* WHReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5222BB0D158A5B2D0073DCFA /* WHReaderViewController.m */; };
 		5222BB17158A85760073DCFA /* WHReaderPanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5222BB16158A85760073DCFA /* WHReaderPanelView.m */; };
-		52256435157E8E22004922B5 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52256434157E8E22004922B5 /* libGoogleAnalytics.a */; };
 		52256438157E9571004922B5 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 52256437157E9571004922B5 /* config.json */; };
 		5225643B157EA234004922B5 /* WHThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5225643A157EA234004922B5 /* WHThumbnailView.m */; };
 		5225643E157EE55D004922B5 /* zepto.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 5225643C157EE543004922B5 /* zepto.min.js */; };
@@ -121,6 +121,13 @@
 		5267926C157E4432002DE2C3 /* NSString+NimbusCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 52679257157E4432002DE2C3 /* NSString+NimbusCore.m */; };
 		5267926D157E4432002DE2C3 /* UIView+NimbusCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 52679259157E4432002DE2C3 /* UIView+NimbusCore.m */; };
 		52679273157E4495002DE2C3 /* NIWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52679272157E4495002DE2C3 /* NIWebController.m */; };
+		526D95BC16134DFB00D4796D /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 526D95BB16134DFB00D4796D /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		526D95BE16134DFE00D4796D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 526D95BD16134DFE00D4796D /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		526D95C016134E0300D4796D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 526D95BF16134E0300D4796D /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		526D95C216134F5600D4796D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 526D95C116134F5600D4796D /* FacebookSDK.framework */; };
+		526D95CA161358E000D4796D /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 526D95C9161358E000D4796D /* libGoogleAnalytics.a */; };
+		526D95CC1614FE5000D4796D /* vignette.png in Resources */ = {isa = PBXBuildFile; fileRef = 526D95CB1614FE5000D4796D /* vignette.png */; };
+		526D95CE1614FE9400D4796D /* noise800.png in Resources */ = {isa = PBXBuildFile; fileRef = 526D95CD1614FE9400D4796D /* noise800.png */; };
 		527674F815BDB33F00BD9E16 /* WHSharingUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 527674F715BDB33F00BD9E16 /* WHSharingUtilities.m */; };
 		527674FC15BDC54D00BD9E16 /* WHVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 527674FB15BDC54D00BD9E16 /* WHVideoViewController.m */; };
 		5276751C15BEF0B100BD9E16 /* WHLiveFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5276751B15BEF0B100BD9E16 /* WHLiveFeedViewController.m */; };
@@ -158,8 +165,6 @@
 		52FCB72215B99FA100B76924 /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52FCB72115B99FA100B76924 /* play@2x.png */; };
 		52FCB72415B99FD100B76924 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 52FCB72315B99FD100B76924 /* play.png */; };
 		52FCB73515B9A21200B76924 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 52FCB72815B9A21200B76924 /* FBDialog.bundle */; };
-		52FCB73615B9A21200B76924 /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52FCB72E15B9A21200B76924 /* libfacebook_ios_sdk.a */; };
-		DAC1EA97162680E100B38871 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC1EA96162680E100B38871 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -169,8 +174,9 @@
 		5208905E15A77883004CD40F /* NSArray+WHAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+WHAdditions.m"; sourceTree = "<group>"; };
 		5208906015A78209004CD40F /* WHLiveBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHLiveBarController.h; sourceTree = "<group>"; };
 		5208906115A78209004CD40F /* WHLiveBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHLiveBarController.m; sourceTree = "<group>"; };
+		5208F9BE160CEDEE00F2C4C2 /* libUAirship-1.3.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libUAirship-1.3.3.a"; path = "libs/Airship/libUAirship-1.3.3.a"; sourceTree = "<group>"; };
+		5208F9C4160CF03500F2C4C2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		520A463915C828C100547BAE /* AppConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfig.plist; sourceTree = "<group>"; };
-		5216259015FAAA1400CB8B59 /* libUAirship-1.3.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libUAirship-1.3.3.a"; path = "libs/Airship/libUAirship-1.3.3.a"; sourceTree = "<group>"; };
 		5221B019157E44FE00265F1B /* NimbusWebController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = NimbusWebController.bundle; path = libs/nimbus/src/webcontroller/resources/NimbusWebController.bundle; sourceTree = SOURCE_ROOT; };
 		5221B01D157E466500265F1B /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "libs/asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		5221B01E157E466500265F1B /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "libs/asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
@@ -205,6 +211,39 @@
 		5222BB0D158A5B2D0073DCFA /* WHReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHReaderViewController.m; sourceTree = "<group>"; };
 		5222BB15158A85760073DCFA /* WHReaderPanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHReaderPanelView.h; sourceTree = "<group>"; };
 		5222BB16158A85760073DCFA /* WHReaderPanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHReaderPanelView.m; sourceTree = "<group>"; };
+		5223A571161E320E00B25877 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
+		5223A572161E320E00B25877 /* FacebookSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookSDK.h; sourceTree = "<group>"; };
+		5223A573161E320E00B25877 /* FBCacheDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBCacheDescriptor.h; sourceTree = "<group>"; };
+		5223A574161E320E00B25877 /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
+		5223A575161E320E00B25877 /* FBDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBDialog.h; sourceTree = "<group>"; };
+		5223A576161E320E00B25877 /* FBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBError.h; sourceTree = "<group>"; };
+		5223A577161E320E00B25877 /* FBFrictionlessRequestSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFrictionlessRequestSettings.h; sourceTree = "<group>"; };
+		5223A578161E320E00B25877 /* FBFriendPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFriendPickerViewController.h; sourceTree = "<group>"; };
+		5223A579161E320E00B25877 /* FBGraphLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGraphLocation.h; sourceTree = "<group>"; };
+		5223A57A161E320E00B25877 /* FBGraphObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGraphObject.h; sourceTree = "<group>"; };
+		5223A57B161E320E00B25877 /* FBGraphPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGraphPlace.h; sourceTree = "<group>"; };
+		5223A57C161E320E00B25877 /* FBGraphUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGraphUser.h; sourceTree = "<group>"; };
+		5223A57D161E320E00B25877 /* FBLoginDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginDialog.h; sourceTree = "<group>"; };
+		5223A57E161E320E00B25877 /* FBLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginView.h; sourceTree = "<group>"; };
+		5223A57F161E320E00B25877 /* FBOpenGraphAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBOpenGraphAction.h; sourceTree = "<group>"; };
+		5223A580161E320E00B25877 /* FBPlacePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPlacePickerViewController.h; sourceTree = "<group>"; };
+		5223A581161E320E00B25877 /* FBProfilePictureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBProfilePictureView.h; sourceTree = "<group>"; };
+		5223A582161E320E00B25877 /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequest.h; sourceTree = "<group>"; };
+		5223A583161E320E00B25877 /* FBRequestConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequestConnection.h; sourceTree = "<group>"; };
+		5223A584161E320E00B25877 /* FBSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSession.h; sourceTree = "<group>"; };
+		5223A585161E320E00B25877 /* FBSessionManualTokenCachingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSessionManualTokenCachingStrategy.h; sourceTree = "<group>"; };
+		5223A586161E320E00B25877 /* FBSessionTokenCachingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSessionTokenCachingStrategy.h; sourceTree = "<group>"; };
+		5223A587161E320E00B25877 /* FBSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSettings.h; sourceTree = "<group>"; };
+		5223A588161E320E00B25877 /* FBTestSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTestSession.h; sourceTree = "<group>"; };
+		5223A589161E320E00B25877 /* FBUserSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBUserSettingsViewController.h; sourceTree = "<group>"; };
+		5223A58A161E320E00B25877 /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
+		5223A58B161E320E00B25877 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		5223A58C161E320E00B25877 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		5223A58D161E320E00B25877 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		5223A58E161E320E00B25877 /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		5223A58F161E320E00B25877 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		5223A590161E320E00B25877 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		5223A591161E320E00B25877 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		52256433157E8E22004922B5 /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GANTracker.h; path = "libs/Google Analytics SDK/Library/GANTracker.h"; sourceTree = SOURCE_ROOT; };
 		52256434157E8E22004922B5 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = "libs/Google Analytics SDK/Library/libGoogleAnalytics.a"; sourceTree = SOURCE_ROOT; };
 		52256437157E9571004922B5 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
@@ -386,7 +425,7 @@
 		5265E79615B8B09B00173B1C /* UASubscriptionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UASubscriptionManager.h; sourceTree = "<group>"; };
 		5265E79715B8B09B00173B1C /* UASubscriptionObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UASubscriptionObserver.h; sourceTree = "<group>"; };
 		5265E79815B8B09B00173B1C /* UASubscriptionProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UASubscriptionProduct.h; sourceTree = "<group>"; };
-		5265E79915B8B09B00173B1C /* libUAirship-1.3.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libUAirship-1.3.3.a"; sourceTree = "<group>"; };
+		5265E79915B8B09B00173B1C /* libUAirship-1.2.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libUAirship-1.2.2.a"; sourceTree = "<group>"; };
 		5265E79A15B8B09B00173B1C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		5265E79B15B8B09B00173B1C /* README.rst */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.rst; sourceTree = "<group>"; };
 		5265E8AA15B8B13700173B1C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -444,6 +483,14 @@
 		52679270157E4495002DE2C3 /* NimbusWebController+Namespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NimbusWebController+Namespace.h"; path = "libs/nimbus/src/webcontroller/src/NimbusWebController+Namespace.h"; sourceTree = SOURCE_ROOT; };
 		52679271157E4495002DE2C3 /* NIWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NIWebController.h; path = libs/nimbus/src/webcontroller/src/NIWebController.h; sourceTree = SOURCE_ROOT; };
 		52679272157E4495002DE2C3 /* NIWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NIWebController.m; path = libs/nimbus/src/webcontroller/src/NIWebController.m; sourceTree = SOURCE_ROOT; };
+		526D95BB16134DFB00D4796D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		526D95BD16134DFE00D4796D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		526D95BF16134E0300D4796D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		526D95C116134F5600D4796D /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../FacebookSDK/build/FacebookSDK.framework; sourceTree = "<group>"; };
+		526D95C8161358E000D4796D /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
+		526D95C9161358E000D4796D /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
+		526D95CB1614FE5000D4796D /* vignette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vignette.png; sourceTree = "<group>"; };
+		526D95CD1614FE9400D4796D /* noise800.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noise800.png; sourceTree = "<group>"; };
 		527674F615BDB33F00BD9E16 /* WHSharingUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHSharingUtilities.h; sourceTree = "<group>"; };
 		527674F715BDB33F00BD9E16 /* WHSharingUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHSharingUtilities.m; sourceTree = "<group>"; };
 		527674FA15BDC54C00BD9E16 /* WHVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHVideoViewController.h; sourceTree = "<group>"; };
@@ -515,7 +562,6 @@
 		52FCB73215B9A21200B76924 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
 		52FCB73315B9A21200B76924 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		52FCB73415B9A21200B76924 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
-		DAC1EA96162680E100B38871 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -523,7 +569,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5216259115FAAA1400CB8B59 /* libUAirship-1.3.3.a in Frameworks */,
+				526D95C016134E0300D4796D /* Social.framework in Frameworks */,
+				526D95BE16134DFE00D4796D /* Accounts.framework in Frameworks */,
+				526D95BC16134DFB00D4796D /* AdSupport.framework in Frameworks */,
 				5265E8AF15B8B15200173B1C /* StoreKit.framework in Frameworks */,
 				5265E8AD15B8B13D00173B1C /* CoreTelephony.framework in Frameworks */,
 				5265E8AB15B8B13700173B1C /* CoreLocation.framework in Frameworks */,
@@ -542,8 +590,9 @@
 				5235CC19155C5FF10095163C /* UIKit.framework in Frameworks */,
 				5235CC1B155C5FF10095163C /* Foundation.framework in Frameworks */,
 				5235CC1D155C5FF10095163C /* CoreGraphics.framework in Frameworks */,
-				52256435157E8E22004922B5 /* libGoogleAnalytics.a in Frameworks */,
-				52FCB73615B9A21200B76924 /* libfacebook_ios_sdk.a in Frameworks */,
+				5208F9BF160CEDEE00F2C4C2 /* libUAirship-1.3.3.a in Frameworks */,
+				526D95C216134F5600D4796D /* FacebookSDK.framework in Frameworks */,
+				526D95CA161358E000D4796D /* libGoogleAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,6 +657,47 @@
 			path = "../libs/asi-http-request/Classes";
 			sourceTree = "<group>";
 		};
+		5223A570161E320E00B25877 /* DeprecatedHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				5223A571161E320E00B25877 /* Facebook.h */,
+				5223A572161E320E00B25877 /* FacebookSDK.h */,
+				5223A573161E320E00B25877 /* FBCacheDescriptor.h */,
+				5223A574161E320E00B25877 /* FBConnect.h */,
+				5223A575161E320E00B25877 /* FBDialog.h */,
+				5223A576161E320E00B25877 /* FBError.h */,
+				5223A577161E320E00B25877 /* FBFrictionlessRequestSettings.h */,
+				5223A578161E320E00B25877 /* FBFriendPickerViewController.h */,
+				5223A579161E320E00B25877 /* FBGraphLocation.h */,
+				5223A57A161E320E00B25877 /* FBGraphObject.h */,
+				5223A57B161E320E00B25877 /* FBGraphPlace.h */,
+				5223A57C161E320E00B25877 /* FBGraphUser.h */,
+				5223A57D161E320E00B25877 /* FBLoginDialog.h */,
+				5223A57E161E320E00B25877 /* FBLoginView.h */,
+				5223A57F161E320E00B25877 /* FBOpenGraphAction.h */,
+				5223A580161E320E00B25877 /* FBPlacePickerViewController.h */,
+				5223A581161E320E00B25877 /* FBProfilePictureView.h */,
+				5223A582161E320E00B25877 /* FBRequest.h */,
+				5223A583161E320E00B25877 /* FBRequestConnection.h */,
+				5223A584161E320E00B25877 /* FBSession.h */,
+				5223A585161E320E00B25877 /* FBSessionManualTokenCachingStrategy.h */,
+				5223A586161E320E00B25877 /* FBSessionTokenCachingStrategy.h */,
+				5223A587161E320E00B25877 /* FBSettings.h */,
+				5223A588161E320E00B25877 /* FBTestSession.h */,
+				5223A589161E320E00B25877 /* FBUserSettingsViewController.h */,
+				5223A58A161E320E00B25877 /* FBViewController.h */,
+				5223A58B161E320E00B25877 /* JSON.h */,
+				5223A58C161E320E00B25877 /* NSObject+SBJSON.h */,
+				5223A58D161E320E00B25877 /* NSString+SBJSON.h */,
+				5223A58E161E320E00B25877 /* SBJSON.h */,
+				5223A58F161E320E00B25877 /* SBJsonBase.h */,
+				5223A590161E320E00B25877 /* SBJsonParser.h */,
+				5223A591161E320E00B25877 /* SBJsonWriter.h */,
+			);
+			name = DeprecatedHeaders;
+			path = ../../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/DeprecatedHeaders;
+			sourceTree = "<group>";
+		};
 		52256432157E8E04004922B5 /* Google Analytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -660,6 +750,8 @@
 		522FC1AD156C02CE0091D47D /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				526D95CD1614FE9400D4796D /* noise800.png */,
+				526D95CB1614FE5000D4796D /* vignette.png */,
 				5232EC8E15C62360004CA89C /* Launch Images */,
 				5276752915BEFD4600BD9E16 /* Zero State Messages */,
 				52FCB72315B99FD100B76924 /* play.png */,
@@ -707,13 +799,13 @@
 		5232EC8E15C62360004CA89C /* Launch Images */ = {
 			isa = PBXGroup;
 			children = (
+				5208F9C4160CF03500F2C4C2 /* Default-568h@2x.png */,
 				5232EC9215C6239F004CA89C /* Default-Landscape.png */,
 				5232EC9315C6239F004CA89C /* Default-Landscape@2x.png */,
 				5232EC9415C6239F004CA89C /* Default-Portrait.png */,
 				5232EC9515C6239F004CA89C /* Default-Portrait@2x.png */,
 				5232EC9615C6239F004CA89C /* Default.png */,
 				5232EC9715C6239F004CA89C /* Default@2x.png */,
-				DAC1EA96162680E100B38871 /* Default-568h@2x.png */,
 			);
 			name = "Launch Images";
 			sourceTree = "<group>";
@@ -739,7 +831,13 @@
 		5235CC17155C5FF10095163C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5216259015FAAA1400CB8B59 /* libUAirship-1.3.3.a */,
+				5223A570161E320E00B25877 /* DeprecatedHeaders */,
+				526D95C7161358E000D4796D /* Library */,
+				526D95C116134F5600D4796D /* FacebookSDK.framework */,
+				526D95BF16134E0300D4796D /* Social.framework */,
+				526D95BD16134DFE00D4796D /* Accounts.framework */,
+				526D95BB16134DFB00D4796D /* AdSupport.framework */,
+				5208F9BE160CEDEE00F2C4C2 /* libUAirship-1.3.3.a */,
 				5265E8AE15B8B15200173B1C /* StoreKit.framework */,
 				5265E8AC15B8B13D00173B1C /* CoreTelephony.framework */,
 				5265E8AA15B8B13700173B1C /* CoreLocation.framework */,
@@ -833,7 +931,7 @@
 				5265E73B15B8B09B00173B1C /* Common */,
 				5265E75715B8B09B00173B1C /* External */,
 				5265E77815B8B09B00173B1C /* Library */,
-				5265E79915B8B09B00173B1C /* libUAirship-1.3.3.a */,
+				5265E79915B8B09B00173B1C /* libUAirship-1.2.2.a */,
 				5265E79A15B8B09B00173B1C /* LICENSE */,
 				5265E79B15B8B09B00173B1C /* README.rst */,
 			);
@@ -1098,6 +1196,16 @@
 				52679272157E4495002DE2C3 /* NIWebController.m */,
 			);
 			name = WebController;
+			sourceTree = "<group>";
+		};
+		526D95C7161358E000D4796D /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				526D95C8161358E000D4796D /* GANTracker.h */,
+				526D95C9161358E000D4796D /* libGoogleAnalytics.a */,
+			);
+			name = Library;
+			path = "libs/Google Analytics SDK/Library";
 			sourceTree = "<group>";
 		};
 		527674F915BDB45500BD9E16 /* Detail View Controllers */ = {
@@ -1374,7 +1482,9 @@
 				5266E07315C9D308009E37C7 /* live-feed-zero-state@2x.png in Resources */,
 				52FAEF0715D0BFC7004E514E /* Icon-Small.png in Resources */,
 				523C27E815D576FD002E093A /* youtube.html in Resources */,
-				DAC1EA97162680E100B38871 /* Default-568h@2x.png in Resources */,
+				5208F9C5160CF03500F2C4C2 /* Default-568h@2x.png in Resources */,
+				526D95CC1614FE5000D4796D /* vignette.png in Resources */,
+				526D95CE1614FE9400D4796D /* noise800.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1592,20 +1702,21 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../FacebookSDK/build\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WhiteHouseApp/WhiteHouseApp-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"\"${SDK_DIR}/usr/include/libxml2\"",
 					"\"$(SRCROOT)/libs/Airship\"",
-					"\"$(SRCROOT)/libs/facebook/lib/facebook-ios-sdk\"",
-					"\"$(SRCROOT)/libs/Google Analytics\"",
 				);
 				INFOPLIST_FILE = "WhiteHouseApp/WhiteHouseApp-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/libs/Google Analytics SDK/Library\"",
 					"\"$(SRCROOT)/libs/Airship\"",
-					"\"$(SRCROOT)/libs/facebook/lib/facebook-ios-sdk\"",
+					"\"$(SRCROOT)/libs/Google Analytics SDK/Library\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1620,20 +1731,21 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../FacebookSDK/build\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WhiteHouseApp/WhiteHouseApp-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"\"${SDK_DIR}/usr/include/libxml2\"",
 					"\"$(SRCROOT)/libs/Airship\"",
-					"\"$(SRCROOT)/libs/facebook/lib/facebook-ios-sdk\"",
-					"\"$(SRCROOT)/libs/Google Analytics\"",
 				);
 				INFOPLIST_FILE = "WhiteHouseApp/WhiteHouseApp-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/libs/Google Analytics SDK/Library\"",
 					"\"$(SRCROOT)/libs/Airship\"",
-					"\"$(SRCROOT)/libs/facebook/lib/facebook-ios-sdk\"",
+					"\"$(SRCROOT)/libs/Google Analytics SDK/Library\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
