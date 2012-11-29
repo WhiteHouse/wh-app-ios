@@ -93,6 +93,17 @@ The optimal size for display is chosen depending on the context (e.g. 640px
 for article feeds on the iPhone 4, or ~70px for photo gallery thumbnails on the 
 iPhone 3GS) and screen density.
 
+### Search
+
+Search functionality on WhiteHouse.gov and in the White House for iOS 
+mobile app relies on USASearch, a hosted site search service provided by 
+the U.S. General Services Administration (GSA). Federal, state, local, 
+tribal, or territorial government websites may use this service at no cost. 
+For details on incorporating USASearch into .Gov sites, or for examples of 
+the API and how it functions, see  [USASearch: About](http://usasearch.howto.gov/about-us)
+and  [USASearch: How (and When) to Use the Search API](http://usasearch.howto.gov/post/36743437542/how-and-when-to-use-the-search-api).
+
+
 
 NOTE: Setting up the application and configuring it for use in your
 organization's context requires iOS development experience. The
