@@ -30,6 +30,7 @@
 //
 //
 
+#import "AFJSONRequestOperation.h"
 #import "WHSearchController.h"
 
 @interface WHSearchController ()
@@ -75,20 +76,16 @@
 - (void)fetchResults
 {
     self.page = self.page + 1;
-    
     NSString *formatString = AppConfig(@"SearchURLFormat");
     NSString *escaped = [[self class] escapeQueryParameter:query];
     NSURL *searchURL = [NSURL URLWithString:[NSString stringWithFormat:formatString, escaped, self.page]];
-    
     DebugLog(@"Search URL = %@", searchURL);
-    NINetworkRequestOperation *op = [[NINetworkRequestOperation alloc] initWithURL:searchURL];
-    
+    NSURLRequest *request = [NSURLRequest requestWithURL:searchURL];
     // this block will be called with the operation itself
-    op.didFinishBlock = ^(id obj) {
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         // cast it to access network-op-specific properties
-        id result = [NSJSONSerialization JSONObjectWithData:op.data options:0 error:nil];
-        DebugLog(@"API result = %@", result);
-        id results = [result objectForKey:@"results"];
+        id results = [JSON objectForKey:@"results"];
+        DebugLog(@"API result = %@", results);
         if (results && [results respondsToSelector:@selector(objectAtIndex:)]) {
             if (self.results) {
                 self.results = [self.results arrayByAddingObjectsFromArray:results];
@@ -97,14 +94,12 @@
             }
             [self.delegate searchControllerDidFindResults:self];
         }
-    };
-    
-    op.didFailWithErrorBlock = ^(id obj, NSError *error) {
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response,NSError *error,id JSON) {
         [self reportError:error];
-    };
-    
+    }];
     // the operation will start when added to the queue
-    [self.queue addOperation:op];
+    [operation start];
 }
 
 
