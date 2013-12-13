@@ -32,7 +32,9 @@
 	<key>CFBundleVersion</key>
 	<string>1010</string>
 	<key>FacebookAppID</key>
-	<string>Your Facebook App ID</string>
+	<string>Your Facebook app ID</string>
+	<key>FacebookDisplayName</key>
+	<string>Your Facebook app display name</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIPrerenderedIcon</key>
