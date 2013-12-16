@@ -80,8 +80,9 @@ static CGSize idealThumbSize;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    WHPhotoGalleryViewController * __weak weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
-        [self.feed fetch];
+        [weakSelf.feed fetch];
     }];
     
     self.tableView.pullToRefreshView.textColor = [UIColor lightGrayColor];
