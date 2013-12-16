@@ -48,7 +48,7 @@
 
 - (void)displayFeedItem:(WHFeedItem *)item
 {
-    [[GANTracker sharedTracker] trackPageview:[NSString stringWithFormat:@"%@/%@", [self trackingPathComponent], [item trackingPathCompontent]] withError:nil];
+    [[[GAI sharedInstance] defaultTracker] sendView:[NSString stringWithFormat:@"%@/%@", [self trackingPathComponent], [item trackingPathCompontent]]];
     
     if (item.enclosureURL) {
         NSString *host = item.enclosureURL.host;

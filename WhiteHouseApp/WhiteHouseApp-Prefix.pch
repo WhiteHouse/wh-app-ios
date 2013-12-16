@@ -12,7 +12,8 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import "NimbusCore.h"
-    #import "GANTracker.h"
+    #import "GAI.h"
+    #import "GAITracker.h"
     #import "UAirship.h"
     #import "WHStyle.h"
     #import "NSArray+WHAdditions.h"

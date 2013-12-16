@@ -80,8 +80,9 @@ NSString* RelativeDateString(NSDate *date)
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    WHBlogViewController * __weak weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
-        [self.feed fetch];
+        [weakSelf.feed fetch];
     }];
 }
 

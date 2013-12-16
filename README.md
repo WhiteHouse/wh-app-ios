@@ -51,28 +51,25 @@ The following libraries are included as submodules:
 
 * [SVPullToRefresh][]
 * [Nimbus][]
-* [Facebook SDK for iOS][fb]
 
 To intialize submodules, run:
 
     git submodule update --init
 
-To build Facebook, `cd` into `libs/facebook` and run
-`./scripts/build_facebook_ios_sdk_static_lib.sh`. This will build the
-static library used by the app.
-
 ### Binary Libraries
 
 The following libraries must be downloaded and installed manually:
 
-* [libUAirship][] - Urban Airship library for iOS
+* [Urban Airship library for iOS][ua]
 * [Google Analytics SDK for iOS][ga]
+* [Facebook SDK for iOS][fb]
 
 To install Urban Airship, download the SDK and place the entire
 `Airship` directory inside of `libs/`.
 
-To install Google Analytics, download the SDK and place the entire
-`Google Analytics SDK` directory inside of `libs/`.
+To install Google Analytics, download the [Standalone SDK][gasdk], rename the `Library` directory to `GoogleAnalytics`, and place it inside of `libs/`.
+
+To install the Facebook SDK, download and install the package, copy the FacebookSDK.framework directory into `libs/`, and drag it into the the `Frameworks` group in your project.
 
 ### Feeds
 
@@ -167,15 +164,15 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 
-[libUAirship]: http://urbanairship.com/resources/
+[ua]: http://urbanairship.com/resources/developer-resources
+[fb]: https://developers.facebook.com/docs/ios/
 [ga]: https://developers.google.com/analytics/devguides/collection/ios/resources
+[gasdk]: http://dl.google.com/dl/gaformobileapps/GoogleAnalyticsiOS_2.0beta4.zip
 [CustomBadge]: http://www.spaulus.com/2011/04/custombadge-2-0-retina-ready-scalable-light-reflex/
 [Underscore.js]: http://underscorejs.org/
 [Zepto.js]: http://zeptojs.com/
 [DTCustomColoredAccessory]: http://www.cocoanetics.com/2010/10/custom-colored-disclosure-indicators/
 [SVPullToRefresh]: https://github.com/samvermette/SVPullToRefresh
-[fb]: https://github.com/facebook/facebook-ios-sdk
 [Nimbus]: https://github.com/jverkoey/nimbus
-
 [forking]: https://help.github.com/articles/fork-a-repo
 [basic tutorial]: https://help.github.com/articles/set-up-git
