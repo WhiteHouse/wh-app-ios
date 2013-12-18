@@ -30,8 +30,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-
 /**
  * Displays a radial gradient with a subtle texture over a background color.
  */

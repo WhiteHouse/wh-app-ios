@@ -30,8 +30,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-
 #import "WHMenuItem.h"
 #import "WHSearchController.h"
 

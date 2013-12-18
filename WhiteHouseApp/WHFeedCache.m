@@ -92,7 +92,7 @@ static WHFeedCache *sharedCache;
 {
     NSFileManager *fileManager = [[NSFileManager alloc] init];
     NSArray *paths = [fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask];
-    NSURL *directoryURL = [paths objectAtIndex:0];
+    NSURL *directoryURL = paths[0];
     if (![fileManager fileExistsAtPath:directoryURL.path]) {
         [fileManager createDirectoryAtURL:directoryURL withIntermediateDirectories:YES attributes:nil error:nil];
     }
@@ -104,7 +104,7 @@ static WHFeedCache *sharedCache;
 {
     NSURL *fileURL =[self databaseFileURL];
     NSError *backupExclusionError = nil;
-    if (![fileURL setResourceValue:[NSNumber numberWithBool:YES] forKey:NSURLIsExcludedFromBackupKey error:&backupExclusionError]) {
+    if (![fileURL setResourceValue:@YES forKey:NSURLIsExcludedFromBackupKey error:&backupExclusionError]) {
         NSLog(@"Could not exclude DB from backup: %@", backupExclusionError.userInfo);
     }
     

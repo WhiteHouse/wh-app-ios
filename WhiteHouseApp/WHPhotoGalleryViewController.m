@@ -80,8 +80,9 @@ static CGSize idealThumbSize;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    WHPhotoGalleryViewController * __weak weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
-        [self.feed fetch];
+        [weakSelf.feed fetch];
     }];
     
     self.tableView.pullToRefreshView.textColor = [UIColor lightGrayColor];
@@ -155,7 +156,7 @@ static CGSize idealThumbSize;
 {
     int itemIndex = (row * _thumbnailsPerRow) + col;
     if (itemIndex < self.posts.count) {
-        return [self.posts objectAtIndex:itemIndex];
+        return (self.posts)[itemIndex];
     }
     
     return nil;
@@ -203,7 +204,7 @@ static CGSize idealThumbSize;
 
 - (void)displayFeedItem:(WHFeedItem *)feedItem
 {
-    [[GANTracker sharedTracker] trackPageview:[NSString stringWithFormat:@"%@/%@", [self trackingPathComponent], [feedItem trackingPathCompontent]] withError:nil];
+    [[[GAI sharedInstance] defaultTracker] sendView:[NSString stringWithFormat:@"%@/%@", [self trackingPathComponent], [feedItem trackingPathCompontent]]];
 
     // handle the image selection here
     WHPhotoViewController *photoView = [[WHPhotoViewController alloc] initWithNibName:nil bundle:nil];

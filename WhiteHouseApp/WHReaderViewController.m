@@ -81,8 +81,9 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
     
+    WHReaderViewController * __weak weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
-        [self.feed fetch];
+        [weakSelf.feed fetch];
     }];
 }
 
@@ -158,7 +159,7 @@ static CGFloat padding = 10.0;
         int itemIndex = (indexPath.row * READER_PANELS_PER_ROW) + ii;
         if (itemIndex < self.posts.count) {
             [panel setHidden:NO];
-            WHFeedItem *item = [self.posts objectAtIndex:itemIndex];
+            WHFeedItem *item = (self.posts)[itemIndex];
             panel.feedItem = item;
             
             UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemTapped:)];

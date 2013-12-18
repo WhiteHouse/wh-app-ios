@@ -30,7 +30,6 @@
 //
 //
 
-#import <Foundation/Foundation.h>
 #import <MessageUI/MessageUI.h>
 #import <Twitter/Twitter.h>
 

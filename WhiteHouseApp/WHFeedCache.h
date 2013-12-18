@@ -30,8 +30,6 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
 #import "WHFeed.h"
 #import "WHFeedItem.h"
 #import "sqlite3.h"

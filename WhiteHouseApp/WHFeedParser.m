@@ -95,7 +95,7 @@ NSRegularExpression *_dupeSpacePattern;
 - (NSString *)tagPath {
     NSMutableString *path = [NSMutableString string];
     for (NSDictionary *context in self.tagStack) {
-        [path appendFormat:@"/%@", [context objectForKey:@"elementName"]];
+        [path appendFormat:@"/%@", context[@"elementName"]];
     }
     return path;
 }
@@ -103,11 +103,9 @@ NSRegularExpression *_dupeSpacePattern;
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
-    NSDictionary *tag = [NSDictionary dictionaryWithObjectsAndKeys:
-                         elementName, @"elementName",
-                         [NSMutableString string], @"text",
-                         attributeDict, @"attributes",
-                         nil];
+    NSDictionary *tag = @{@"elementName": elementName,
+                         @"text": [NSMutableString string],
+                         @"attributes": attributeDict};
     // push tag onto stack
     [self.tagStack addObject:tag];
     
@@ -119,17 +117,17 @@ NSRegularExpression *_dupeSpacePattern;
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-    [[[self.tagStack lastObject] objectForKey:@"text"] appendString:string];
+    [[self.tagStack lastObject][@"text"] appendString:string];
 }
 
 
 - (WHMediaElement *)mediaElementFromAttributes:(NSDictionary *)attrs
 {
     WHMediaElement *media = [WHMediaElement new];
-    NSString *stringURL = [attrs objectForKey:@"url"];
+    NSString *stringURL = attrs[@"url"];
     media.URL = [NSURL URLWithString:stringURL];
-    media.size = CGSizeMake([[attrs objectForKey:@"width"] floatValue], [[attrs objectForKey:@"height"] floatValue]);
-    media.type = [attrs objectForKey:@"type"];
+    media.size = CGSizeMake([attrs[@"width"] floatValue], [attrs[@"height"] floatValue]);
+    media.type = attrs[@"type"];
     return media;
 }
 
@@ -138,8 +136,8 @@ NSRegularExpression *_dupeSpacePattern;
 {
     NSString *tagPath = [self tagPath];
     NSDictionary *context = [self.tagStack lastObject];
-    NSDictionary *attrs = [context objectForKey:@"attributes"];
-    NSString *text = [context objectForKey:@"text"];
+    NSDictionary *attrs = context[@"attributes"];
+    NSString *text = context[@"text"];
 
     if ([tagPath isEqualToString:@"/rss/channel/item"]) {
         self.callbackBlock(self.currentItem);
@@ -167,13 +165,13 @@ NSRegularExpression *_dupeSpacePattern;
     } else if ([tagPath hasSuffix:@"item/media:content"]) {
         [self.currentItem addMediaContent:[self mediaElementFromAttributes:attrs]];
     } else if ([tagPath hasSuffix:@"item/enclosure"]) {
-        self.currentItem.enclosureURL = [NSURL URLWithString:[[context objectForKey:@"attributes"] objectForKey:@"url"]];
+        self.currentItem.enclosureURL = [NSURL URLWithString:context[@"attributes"][@"url"]];
     } else if ([tagPath hasSuffix:@"item/category"]) {
         NSArray *categories = self.currentItem.categories;
         if (categories) {
             self.currentItem.categories = [categories arrayByAddingObject:text];
         } else {
-            self.currentItem.categories = [NSArray arrayWithObject:text];
+            self.currentItem.categories = @[text];
         }
     } else if ([tagPath hasSuffix:@"item/pubDate"]) {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

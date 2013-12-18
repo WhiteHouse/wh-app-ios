@@ -64,10 +64,10 @@ static WHFeedCollection *sharedFeedCollection = nil;
 
 - (WHFeed *)feedForURL:(NSURL *)feedURL
 {
-    WHFeed *controller = [self.feeds objectForKey:feedURL];
+    WHFeed *controller = (self.feeds)[feedURL];
     if (controller == nil) {
         controller = [[WHFeed alloc] initWithFeedURL:feedURL];
-        [self.feeds setObject:controller forKey:feedURL];
+        (self.feeds)[feedURL] = controller;
     }
     
     return controller;

@@ -76,7 +76,7 @@
         [layer insertSublayer:self.gradient atIndex:0];
     }
     self.gradient.frame = self.bounds;
-    self.gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithWhite:0.9 alpha:1.0] CGColor], (id)[[UIColor whiteColor] CGColor], nil];
+    self.gradient.colors = @[(id)[[UIColor colorWithWhite:0.9 alpha:1.0] CGColor], (id)[[UIColor whiteColor] CGColor]];
     
     // set up the drop shadow
     layer.shadowOffset = CGSizeMake(0, 3.0);

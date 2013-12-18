@@ -1,9 +1,6 @@
 [submodule "libs/asi-http-request"]
 	path = libs/asi-http-request
 	url = https://github.com/pokeb/asi-http-request.git
-[submodule "libs/facebook"]
-	path = libs/facebook
-	url = https://github.com/facebook/facebook-ios-sdk.git
 [submodule "libs/nimbus"]
 	path = libs/nimbus
 	url = https://github.com/mobomo/nimbus.git

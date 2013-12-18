@@ -30,8 +30,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-
 @class WHFeedItem;
 
 @interface UIViewController (WHFeedItemPresentation)

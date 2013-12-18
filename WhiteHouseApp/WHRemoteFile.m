@@ -57,7 +57,7 @@
 {
     NSFileManager *fm = [[NSFileManager alloc] init];
     NSArray *appSupportURLs = [fm URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask];
-    NSURL *directoryURL = [appSupportURLs objectAtIndex:0];
+    NSURL *directoryURL = appSupportURLs[0];
     NSString *directoryPath = [directoryURL path];
     if (![fm fileExistsAtPath:directoryPath]) {
         DebugLog(@"Creating app support directory");

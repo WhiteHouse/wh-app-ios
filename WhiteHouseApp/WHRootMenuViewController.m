@@ -73,7 +73,7 @@
     _selectedMenuItemIndex = selectedMenuItemIndex;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectedMenuItemIndex inSection:0];
     [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-    self.revealViewController.contentViewController = [[self.menuItems objectAtIndex:indexPath.row] viewController];
+    self.revealViewController.contentViewController = [(self.menuItems)[indexPath.row] viewController];
     [self.revealViewController setMenuVisible:NO wantsFullWidth:NO];
 }
 
@@ -191,8 +191,8 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    NSDictionary *searchItem = [self.searchController.results objectAtIndex:indexPath.row];
-    cell.textLabel.text = [[searchItem objectForKey:@"title"] stringByRemovingSearchHighlight];
+    NSDictionary *searchItem = (self.searchController.results)[indexPath.row];
+    cell.textLabel.text = [searchItem[@"title"] stringByRemovingSearchHighlight];
     
     return cell;
 }
@@ -229,7 +229,7 @@
         cell.accessoryView = [DTCustomColoredAccessory accessoryWithColor:cell.textLabel.textColor];
     }
     
-    WHMenuItem *item = [self.menuItems objectAtIndex:indexPath.row];
+    WHMenuItem *item = (self.menuItems)[indexPath.row];
     cell.textLabel.text = item.title;
     
     return cell;
@@ -246,7 +246,7 @@
 {
     DebugLog(@"selected row %i", indexPath.row);
     if (tableView == self.tableView) {
-        self.revealViewController.contentViewController = [[self.menuItems objectAtIndex:indexPath.row] viewController];
+        self.revealViewController.contentViewController = [(self.menuItems)[indexPath.row] viewController];
         [self.revealViewController setMenuVisible:NO wantsFullWidth:NO];
     } else {
         NIWebController *browser = [[NIWebController alloc] initWithNibName:nil bundle:nil];
@@ -262,8 +262,8 @@
         [self.searchDisplayController setActive:NO];
         [self.revealViewController setMenuVisible:NO wantsFullWidth:NO];
         
-        NSDictionary *searchItem = [self.searchController.results objectAtIndex:indexPath.row];
-        NSURL *theURL = [NSURL URLWithString:[searchItem objectForKey:@"unescapedUrl"]];
+        NSDictionary *searchItem = (self.searchController.results)[indexPath.row];
+        NSURL *theURL = [NSURL URLWithString:searchItem[@"unescapedUrl"]];
         DebugLog(@"theURL = %@", theURL);
         
         [browser openURL:theURL];

@@ -30,8 +30,6 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
 /**
  * Represents the RSS <media:thumbnail>, <media:content> and <media:enclosure> elements
  */

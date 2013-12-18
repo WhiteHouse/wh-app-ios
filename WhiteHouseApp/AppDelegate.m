@@ -25,12 +25,12 @@
  */
 
 //
-//  WHAppDelegate.m
+//  AppDelegate.m
 //  WhiteHouseApp
 //
 //
 
-#import "WHAppDelegate.h"
+#import "AppDelegate.h"
 
 #import "WHRootMenuViewController.h"
 #import "WHFeedCollection.h"
@@ -45,17 +45,19 @@
 #import "UAPush.h"
 
 
-@interface WHAppDelegate ()
+@interface AppDelegate ()
 @property (nonatomic, strong) WHRevealViewController *reveal;
 @property (nonatomic, strong) WHRootMenuViewController *menu;
 @property (nonatomic, strong) WHFeedViewController *liveSectionViewController;
 @property (nonatomic, strong) WHLiveController *liveController;
-@property (nonatomic, strong) Facebook *facebook;
 @property (nonatomic, strong) NSDictionary *pendingNotification;
+- (void)initFacebook;
+- (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error;
+- (NSDictionary*)parseURLParams:(NSString *)query;
 @end
 
 
-@implementation WHAppDelegate
+@implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize reveal = _reveal;
@@ -63,7 +65,6 @@
 @synthesize liveSectionViewController = _liveViewController;
 @synthesize liveController;
 @synthesize liveBarController;
-@synthesize facebook;
 @synthesize pendingNotification;
 
 - (void)configureAppearance
@@ -86,7 +87,7 @@
 - (WHMenuItem *)createMenuItem:(UIViewController *)viewController
 {
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    navController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[WHStyle headingFontWithSize:22.0], UITextAttributeFont, nil];
+    navController.navigationBar.titleTextAttributes = @{UITextAttributeFont: [WHStyle headingFontWithSize:22.0]};
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(revealToggle:)];
     viewController.navigationItem.leftBarButtonItem = menuButton;
     return [[WHMenuItem alloc] initWithTitle:viewController.title icon:nil viewController:navController];
@@ -136,13 +137,13 @@
     
     NSDictionary *feedConfig = [self feedConfig];
     
-    NSArray *menuItemsConfig = [feedConfig objectForKey:@"feeds"];
+    NSArray *menuItemsConfig = feedConfig[@"feeds"];
     
     int currentIndex = 0;
     for (NSDictionary *itemConfig in menuItemsConfig) {
-        NSString *title = [itemConfig objectForKey:@"title"];
-        NSURL *feedURL = [NSURL URLWithString:[itemConfig objectForKey:@"feed-url"]];
-        NSString *viewType = [itemConfig objectForKey:@"view-type"];
+        NSString *title = itemConfig[@"title"];
+        NSURL *feedURL = [NSURL URLWithString:itemConfig[@"feed-url"]];
+        NSString *viewType = itemConfig[@"view-type"];
         
         WHFeed *feed = nil;
         if (feedURL) {
@@ -157,7 +158,7 @@
         if ([viewType isEqualToString:@"article-list"]) {
             if (NIIsPad()) {
                 WHReaderViewController *reader = [[WHReaderViewController alloc] initWithFeed:feed];
-                NSNumber *showAuthor = [itemConfig objectForKey:@"show-author"];
+                NSNumber *showAuthor = itemConfig[@"show-author"];
                 reader.showAuthor = [showAuthor boolValue];
                 viewController = reader;
             } else {
@@ -205,18 +206,21 @@
     
     [self configureAppearance];
     
-    
     // configure Google Analytics
     NSString *accountID = AppConfig(@"GANAccountID");
-    GANTracker *tracker = [GANTracker sharedTracker];
+    [GAI sharedInstance].dispatchInterval = 30;
     
-    // do not send full IP addresses
-    tracker.anonymizeIp = YES;
-    [tracker startTrackerWithAccountID:accountID dispatchPeriod:30 delegate:nil];
-    [tracker trackPageview:@"/LAUNCH" withError:nil];
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:accountID];
+    tracker.anonymize = YES;
+    [tracker sendView:@"/LAUNCH"];
+    
+    // check for cached facebook session
+    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
+        [self initFacebook];
+    }
     
     self.menu = [self loadMenu];
-    UIViewController *defaultViewController = [[self.menu.menuItems objectAtIndex:0] viewController];
+    UIViewController *defaultViewController = [(self.menu.menuItems)[0] viewController];
     self.reveal = [[WHRevealViewController alloc] initWithMenuViewController:self.menu contentViewController:defaultViewController];
     self.window.rootViewController = self.reveal;
     
@@ -226,7 +230,7 @@
     self.menu.selectedMenuItemIndex = 0;
     
     // notifications MUST be handled after the menu is loaded
-    NSDictionary *note = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    NSDictionary *note = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if (note) {
         [self handleNotification:note];
     }
@@ -243,22 +247,24 @@
     return YES;
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [FBAppEvents activateApp];
+    [FBSession.activeSession handleDidBecomeActive];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    [FBSession.activeSession close];
+}
 
 - (void)initAirship:(UIApplication *)application
 {
-    [UAirship takeOff:[NSDictionary dictionary]];
+    [UAirship takeOff];
     
-    // Register for notifications
-    [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                     UIRemoteNotificationTypeSound |
-                                                     UIRemoteNotificationTypeAlert)];
+    // Register for notifications    
+    [UAPush shared].notificationTypes = (UIRemoteNotificationTypeBadge |
+                                         UIRemoteNotificationTypeSound |
+                                         UIRemoteNotificationTypeAlert);
 }
-
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    [UAirship land];
-}
-
 
 #pragma mark Push notification handling
 
@@ -288,9 +294,9 @@
 #ifdef DEBUG
 - (void)testNotification
 {
-    NSDictionary *aps = [NSDictionary dictionaryWithObjectsAndKeys:@"test DEBUG", @"alert", nil];
-    NSDictionary *custom = [NSDictionary dictionaryWithObjectsAndKeys:@"http://google.com", @"video-url", nil];
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:aps, @"aps", custom, @"wh", nil];
+    NSDictionary *aps = @{@"alert": @"test DEBUG"};
+    NSDictionary *custom = @{@"video-url": @"http://google.com"};
+    NSDictionary *userInfo = @{@"aps": aps, @"wh": custom};
     [self application:[UIApplication sharedApplication] didReceiveRemoteNotification:userInfo];
 }
 #endif
@@ -298,15 +304,15 @@
 
 + (id)customDataForNotification:(NSDictionary *)userInfo
 {
-    return [userInfo objectForKey:@"wh"];
+    return userInfo[@"wh"];
 }
 
 
 - (void)handleNotification:(NSDictionary *)userInfo
 {
     NSDictionary *custom = [[self class] customDataForNotification:userInfo];
-    NSString *notificationURLString = [custom objectForKey:@"video-url"];
-    if ([[custom objectForKey:@"action"] isEqualToString:@"go-live"] || notificationURLString != nil) {
+    NSString *notificationURLString = custom[@"video-url"];
+    if ([custom[@"action"] isEqualToString:@"go-live"] || notificationURLString != nil) {
         self.menu.selectedMenuItemIndex = liveSectionMenuIndex;
         
         if (notificationURLString) {
@@ -339,7 +345,7 @@
         self.pendingNotification = userInfo;
         
         // the aps.alert value is the only text displayed (the alert has no title)
-        NSString *message = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+        NSString *message = userInfo[@"aps"][@"alert"];
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                         message:message
@@ -349,7 +355,7 @@
 
         // if there's a video URL or action, the alert should have a "View" button
         NSDictionary *custom = [[self class] customDataForNotification:userInfo];
-        if ([custom objectForKey:@"video-url"] || [custom objectForKey:@"action"])
+        if (custom[@"video-url"] || custom[@"action"])
         {
             [alert addButtonWithTitle:NSLocalizedString(@"PushNotificationViewButton", @"A button to view the content of a push notification")];
         }
@@ -381,102 +387,102 @@
     [self.reveal setMenuVisible:YES wantsFullWidth:NO];
 }
 
+//#pragma mark - Facebook methods
 
-#pragma mark - Facebook methods
-
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [self.facebook handleOpenURL:url]; 
+- (BOOL)application:(UIApplication *)application 
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication 
+         annotation:(id)annotation {
+    return [FBSession.activeSession handleOpenURL:url]; 
 }
-
 
 - (void)initFacebook
 {
-    if (self.facebook) {
-        return;
+    [FBSession openActiveSessionWithReadPermissions:nil
+                                       allowLoginUI:NO
+                                  completionHandler:
+                                       ^(FBSession *session, 
+                                         FBSessionState state, NSError *error) {
+                    [self sessionStateChanged:session state:state error:error];
+    }];
+}
+
+- (void)sessionStateChanged:(FBSession *)session 
+                      state:(FBSessionState)state
+                      error:(NSError *)error
+{
+    switch (state) {
+        case FBSessionStateOpen:
+            NSLog(@"User has logged in to Facebook (or cached token was available)");
+            break;
+        case FBSessionStateOpenTokenExtended:
+            NSLog(@"Facebook token has been extended");
+            break;
+        case FBSessionStateClosedLoginFailed:
+            NSLog(@"Facebook login attempt failed");
+            [FBSession.activeSession closeAndClearTokenInformation];
+            break;
+        case FBSessionStateClosed:
+            NSLog(@"Facebook session was closed");
+            break;
+        default:
+            break;
     }
     
-    NSString *fbID = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"FacebookAppID"];
-    if (fbID) {
-        // facebook
-        self.facebook = [[Facebook alloc] initWithAppId:fbID andDelegate:self];
+    if (error) {
+        NSLog(@"Facebook session state change error: %@", error.localizedDescription);
     }
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] 
-        && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        self.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        self.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+}
+
+- (NSDictionary*)parseURLParams:(NSString *)query {
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    for (NSString *pair in pairs) {
+        NSArray *kv = [pair componentsSeparatedByString:@"="];
+        NSString *val = [kv[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        params[kv[0]] = val;
     }
-    
-    self.facebook.sessionDelegate = self;
-    
-    [self.facebook authorize:nil];
+    return params;
 }
-
-
-- (void)updateFacebookToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:accessToken forKey:@"FBAccessTokenKey"];
-    [defaults setObject:expiresAt forKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
-}
-
-
-- (void)fbDidLogin
-{
-    [self updateFacebookToken:facebook.accessToken expiresAt:facebook.expirationDate];
-}
-
-
-- (void)fbDidNotLogin:(BOOL)cancelled
-{
-    NSLog(@"User did not log in to Facebook");
-}
-
-
-- (void)fbDidLogout
-{
-    NSLog(@"User did log out from Facebook");
-}
-
-
-- (void)fbSessionInvalidated
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:@"FBAccessTokenKey"];
-    [defaults removeObjectForKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
-}
-
-
-- (void)fbDidExtendToken:(NSString*)accessToken
-               expiresAt:(NSDate*)expiresAt
-{
-    [self updateFacebookToken:accessToken expiresAt:expiresAt];
-}
-
 
 - (void)shareOnFacebook:(WHFeedItem *)item
 {
-    [self initFacebook];
-    NSMutableDictionary *sharingParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:[item.link absoluteString], @"link", item.title, @"name", nil];
+    if (!FBSession.activeSession.isOpen) {
+        [self initFacebook];
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:[item.link absoluteString], @"link", item.title, @"name", nil];
     
     // look for pictures in the post
     WHMediaElement *media = [item bestContentForWidth:0];
-    
     if (media == nil) {
         media = [item bestThumbnailForWidth:0];
     }
-    
     if (media) {
-        [sharingParams setObject:[media.URL absoluteString] forKey:@"picture"];
+        params[@"picture"] = [media.URL absoluteString];
     }
-        
-    [self.facebook dialog:@"feed" andParams:sharingParams andDelegate:self];
+    
+    [FBWebDialogs presentFeedDialogModallyWithSession:nil 
+                                           parameters:params 
+                                              handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
+                                                  if (error) {
+                                                      // Error launching the dialog or publishing story
+                                                      NSLog(@"Error publishing Facebook story: %@", error.localizedDescription);
+                                                      return;
+                                                  }
+                                                  if (result == FBWebDialogResultDialogNotCompleted) {
+                                                      // User clicked the "x" icon
+                                                      NSLog(@"User canceled Facebook story publishing");
+                                                      return;
+                                                  }
+                                                  NSDictionary *urlParams = [self parseURLParams:[resultURL query]];
+                                                  if (![urlParams valueForKey:@"post_id"]) {
+                                                      // User clicked the Cancel button
+                                                      NSLog(@"User canceled Facebook story publishing");
+                                                      return;
+                                                  }
+                                                  NSLog(@"Posted Facebook story, id: %@", [urlParams valueForKey:@"post_id"]);
+    }];
 }
-
 
 @end

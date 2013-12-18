@@ -86,7 +86,7 @@
         DebugLog(@"Long press detected...");
         UITableViewCell *cell = (UITableViewCell *)recognizer.view;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        WHFeedItem *item = [[self.postsByDate objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        WHFeedItem *item = (self.postsByDate)[indexPath.section][indexPath.row];
         [self.sharing share:item];
     }
 }

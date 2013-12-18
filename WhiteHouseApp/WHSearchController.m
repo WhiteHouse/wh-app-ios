@@ -84,11 +84,12 @@
     NINetworkRequestOperation *op = [[NINetworkRequestOperation alloc] initWithURL:searchURL];
     
     // this block will be called with the operation itself
+    NINetworkRequestOperation * __weak weakOp = op;
     op.didFinishBlock = ^(id obj) {
         // cast it to access network-op-specific properties
-        id result = [NSJSONSerialization JSONObjectWithData:op.data options:0 error:nil];
+        id result = [NSJSONSerialization JSONObjectWithData:weakOp.data options:0 error:nil];
         DebugLog(@"API result = %@", result);
-        id results = [result objectForKey:@"results"];
+        id results = result[@"results"];
         if (results && [results respondsToSelector:@selector(objectAtIndex:)]) {
             if (self.results) {
                 self.results = [self.results arrayByAddingObjectsFromArray:results];

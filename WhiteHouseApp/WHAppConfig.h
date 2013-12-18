@@ -30,8 +30,6 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
 /**
  * Represents the configuration found in AppConfig.plist, made
  * globally available through a shared instance

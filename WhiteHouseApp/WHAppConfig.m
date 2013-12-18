@@ -81,7 +81,7 @@ static WHAppConfig *sharedInstance;
 
 - (id)objectForKey:(NSString *)key
 {
-    id result = [self.config objectForKey:key];
+    id result = (self.config)[key];
     if (!result) {
         [NSException raise:NSGenericException format:@"No value found for config key: %@", key];
     }

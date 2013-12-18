@@ -30,8 +30,6 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
 @interface WHMenuItem : NSObject
 
 @property NSString *title;

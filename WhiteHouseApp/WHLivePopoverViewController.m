@@ -88,7 +88,7 @@
         cell.detailTextLabel.text = @"Tap to watch now";
     }
     
-    WHFeedItem *item = [self.items objectAtIndex:indexPath.row];
+    WHFeedItem *item = (self.items)[indexPath.row];
     cell.textLabel.text = item.title;
     
     return cell;
@@ -104,7 +104,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSelector:@selector(deselect:) withObject:indexPath afterDelay:0.01];
-    WHFeedItem *item = [self.items objectAtIndex:indexPath.row];
+    WHFeedItem *item = (self.items)[indexPath.row];
     
     if (item.enclosureURL) {
         DebugLog(@"Playing video at %@", item.enclosureURL);    
@@ -126,9 +126,9 @@
 - (void)movieFinished:(NSNotification *)notification
 {
     DebugLog(@"movie finished: %@", notification.userInfo);
-    NSInteger reason = [[notification.userInfo objectForKey:MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] intValue];
+    NSInteger reason = [(notification.userInfo)[MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] intValue];
     if (reason == MPMovieFinishReasonPlaybackError) {
-        NSError *error = [notification.userInfo objectForKey:@"error"];
+        NSError *error = (notification.userInfo)[@"error"];
         
         NSString *msg = NSLocalizedString(@"VideoErrorMessage", @"There was a problem playing this video. Please try again later.");
         NSString *errorMessage = [NSString stringWithFormat:@"%@\n\n(%@)", msg, [error localizedDescription]];

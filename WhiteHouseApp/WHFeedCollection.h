@@ -30,8 +30,6 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
 #import "WHFeed.h"
 
 /**

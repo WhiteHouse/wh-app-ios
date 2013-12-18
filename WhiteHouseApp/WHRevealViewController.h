@@ -30,8 +30,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-
 @interface WHRevealViewController : UIViewController
 
 @property (nonatomic, retain) UIViewController *contentViewController;

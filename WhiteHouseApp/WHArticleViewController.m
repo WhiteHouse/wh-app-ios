@@ -32,7 +32,7 @@
 
 #import "WHArticleViewController.h"
 
-#import "WHAppDelegate.h"
+#import "AppDelegate.h"
 #import "NIWebController.h"
 #import "WHSharingUtilities.h"
 
@@ -89,13 +89,13 @@
     NSString *dateString = [dateFormatter stringFromDate:self.feedItem.pubDate];
     
     NSMutableDictionary *pageInfo = [NSMutableDictionary dictionary];
-    [pageInfo setObject:self.feedItem.descriptionHTML forKey:@"description"];
-    [pageInfo setObject:[self.feedItem.link absoluteString] forKey:@"link"];
-    [pageInfo setObject:self.feedItem.title forKey:@"title"];
-    [pageInfo setObject:dateString forKey:@"date"];
-    [pageInfo setObject:[NSNumber numberWithInt:[self.feedItem.pubDate timeIntervalSince1970]] forKey:@"timestamp"];
-    [pageInfo setObject:self.feedItem.creator forKey:@"creator"];
-    [pageInfo setObject:AppConfig(@"ArticleBaseURL") forKey:@"baseURL"];
+    pageInfo[@"description"] = self.feedItem.descriptionHTML;
+    pageInfo[@"link"] = [self.feedItem.link absoluteString];
+    pageInfo[@"title"] = self.feedItem.title;
+    pageInfo[@"date"] = dateString;
+    pageInfo[@"timestamp"] = [NSNumber numberWithInt:[self.feedItem.pubDate timeIntervalSince1970]];
+    pageInfo[@"creator"] = self.feedItem.creator;
+    pageInfo[@"baseURL"] = AppConfig(@"ArticleBaseURL");
     
     NSError *error = nil;
     NSData *pageInfoData = [NSJSONSerialization dataWithJSONObject:pageInfo options:0 error:&error];
@@ -173,7 +173,7 @@
     UIBarButtonItem *itemSmaller = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shrinkify"] style:UIBarButtonItemStylePlain target:self action:@selector(textDown)];
     UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     UIBarButtonItem *branding = [[UIBarButtonItem alloc] initWithCustomView:[self brandingView]];
-    self.toolbar.items = [NSArray arrayWithObjects:item, itemSmaller, space, branding, space, nil];
+    self.toolbar.items = @[item, itemSmaller, space, branding, space];
     
     [self.view addSubview:self.toolbar];
     

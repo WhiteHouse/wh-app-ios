@@ -80,8 +80,9 @@ NSString* RelativeDateString(NSDate *date)
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    WHBlogViewController * __weak weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
-        [self.feed fetch];
+        [weakSelf.feed fetch];
     }];
 }
 
@@ -107,7 +108,7 @@ NSString* RelativeDateString(NSDate *date)
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    WHFeedItem *item = [[self.postsByDate objectAtIndex:section] firstObject];
+    WHFeedItem *item = [(self.postsByDate)[section] firstObject];
     NSDate *day = DayFromDate(item.pubDate);
     NSDate *today = DayFromDate([NSDate date]);
     
@@ -127,12 +128,12 @@ NSString* RelativeDateString(NSDate *date)
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[self.postsByDate objectAtIndex:section] count];
+    return [(self.postsByDate)[section] count];
 }
 
 - (WHFeedItem *)feedItemForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[self.postsByDate objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    return (self.postsByDate)[indexPath.section][indexPath.row];
 }
 
 - (NSURL *)thumbnailURLForItem:(WHFeedItem *)item

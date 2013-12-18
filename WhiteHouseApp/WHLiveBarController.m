@@ -75,7 +75,7 @@ NSString * const WHLiveBarWillHideNotification = @"WHLiveBarDidHideNotification"
 - (void)setTitleLabel
 {
     if (self.items.count == 1) {
-        self.liveBarTitleLabel.text = [[self.items objectAtIndex:0] title];
+        self.liveBarTitleLabel.text = [(self.items)[0] title];
     } else if (self.items.count > 1) {
         self.liveBarTitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"LiveBarTitleFormat", @"%i events live now"), self.items.count];
     }
@@ -85,7 +85,7 @@ NSString * const WHLiveBarWillHideNotification = @"WHLiveBarDidHideNotification"
 - (void)liveFeedChanged:(NSNotification *)notification
 {
     DebugLog(@"got live items");
-    self.items = [notification.userInfo objectForKey:WHLiveEventsChangedLiveItemsKey];
+    self.items = (notification.userInfo)[WHLiveEventsChangedLiveItemsKey];
     if (self.items.count) {
         [[NSNotificationCenter defaultCenter] postNotificationName:WHLiveBarWillAppearNotification object:self];
         [self show];
@@ -217,7 +217,7 @@ NSString * const WHLiveBarWillHideNotification = @"WHLiveBarDidHideNotification"
         cell.detailTextLabel.text = NSLocalizedString(@"LiveBarPrompting", @"Tap to watch now");
     }
 
-    WHFeedItem *item = [self.items objectAtIndex:indexPath.row];
+    WHFeedItem *item = (self.items)[indexPath.row];
     cell.textLabel.text = item.title;
     
     return cell;
@@ -231,7 +231,7 @@ NSString * const WHLiveBarWillHideNotification = @"WHLiveBarDidHideNotification"
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSelector:@selector(deselect:) withObject:indexPath afterDelay:0.01];
-    WHFeedItem *item = [self.items objectAtIndex:indexPath.row];
+    WHFeedItem *item = (self.items)[indexPath.row];
     
     if (item.enclosureURL) {
         DebugLog(@"Playing video at %@", item.enclosureURL);    
@@ -251,9 +251,9 @@ NSString * const WHLiveBarWillHideNotification = @"WHLiveBarDidHideNotification"
 - (void)movieFinished:(NSNotification *)notification
 {
     DebugLog(@"movie finished: %@", notification.userInfo);
-    NSInteger reason = [[notification.userInfo objectForKey:MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] intValue];
+    NSInteger reason = [(notification.userInfo)[MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] intValue];
     if (reason == MPMovieFinishReasonPlaybackError) {
-        NSError *error = [notification.userInfo objectForKey:@"error"];
+        NSError *error = (notification.userInfo)[@"error"];
         
         NSString *msg = NSLocalizedString(@"VideoErrorMessage", @"There was a problem playing this video. Please try again later.");
         NSString *errorMessage = [NSString stringWithFormat:@"%@\n\n(%@)", msg, [error localizedDescription]];

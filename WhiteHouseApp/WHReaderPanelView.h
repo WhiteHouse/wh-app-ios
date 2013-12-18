@@ -30,10 +30,7 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-
 #import "WHFeedItem.h"
-
 
 /**
  * Displays a single feed item in a panel suitable for a grid layout

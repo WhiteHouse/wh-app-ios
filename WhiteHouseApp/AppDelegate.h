@@ -25,28 +25,25 @@
  */
 
 //
-//  WHAppDelegate.h
+//  AppDelegate.h
 //  WhiteHouseApp
 //
 //
 
-#import <UIKit/UIKit.h>
-
-#import "Facebook.h"
+#import <FacebookSDK/FacebookSDK.h>
 #import "WHRootMenuViewController.h"
 #import "WHLiveBarController.h"
 #import "WHRevealViewController.h"
 #import "WHFeedViewController.h"
 #import "WHLiveController.h"
 
-@interface WHAppDelegate : UIResponder <UIApplicationDelegate, FBSessionDelegate, FBDialogDelegate, UIAlertViewDelegate> {
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UIAlertViewDelegate> {
     int liveSectionMenuIndex;
 }
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) WHLiveBarController *liveBarController;
 
-- (void)initFacebook;
 - (void)shareOnFacebook:(WHFeedItem *)item;
 
 @end

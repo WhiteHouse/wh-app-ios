@@ -30,8 +30,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-
 @interface WHFavoritesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

@@ -2,15 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>DEVELOPMENT_APP_KEY</key>
-	<string>your development key</string>
-	<key>DEVELOPMENT_APP_SECRET</key>
-	<string>your development secret</string>
-	<key>PRODUCTION_APP_KEY</key>
-	<string>your production key</string>
-	<key>PRODUCTION_APP_SECRET</key>
-	<string>your production secret</string>
-	<key>APP_STORE_OR_AD_HOC_BUILD</key>
-	<false/>
+  <key>inProduction</key>
+  <false/>
+  <key>developmentAppKey</key>
+  <string>Your Development App Key</string>
+  <key>developmentAppSecret</key>
+  <string>Your Development App Secret</string>
+  <key>productionAppKey</key>
+  <string>Your Production App Key</string>
+  <key>productionAppSecret</key>
+  <string>Your Production App Secret</string>
 </dict>
 </plist>
