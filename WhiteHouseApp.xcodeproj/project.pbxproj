@@ -63,7 +63,7 @@
 		5235CC1D155C5FF10095163C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5235CC1C155C5FF10095163C /* CoreGraphics.framework */; };
 		5235CC23155C5FF10095163C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5235CC21155C5FF10095163C /* InfoPlist.strings */; };
 		5235CC25155C5FF10095163C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5235CC24155C5FF10095163C /* main.m */; };
-		5235CC29155C5FF10095163C /* WHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5235CC28155C5FF10095163C /* WHAppDelegate.m */; };
+		5235CC29155C5FF10095163C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5235CC28155C5FF10095163C /* AppDelegate.m */; };
 		523A97AD1587E70700E6B9DA /* NIPhotoAlbumScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 523A97A21587E70700E6B9DA /* NIPhotoAlbumScrollView.m */; };
 		523A97AE1587E70700E6B9DA /* NIPhotoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 523A97A61587E70700E6B9DA /* NIPhotoScrollView.m */; };
 		523A97AF1587E70700E6B9DA /* NIPhotoScrubberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 523A97AA1587E70700E6B9DA /* NIPhotoScrubberView.m */; };
@@ -249,12 +249,12 @@
 		5235CC18155C5FF10095163C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5235CC1A155C5FF10095163C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5235CC1C155C5FF10095163C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		5235CC20155C5FF10095163C /* WhiteHouseApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WhiteHouseApp-Info.plist"; sourceTree = "<group>"; };
+		5235CC20155C5FF10095163C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5235CC22155C5FF10095163C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5235CC24155C5FF10095163C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5235CC26155C5FF10095163C /* WhiteHouseApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WhiteHouseApp-Prefix.pch"; sourceTree = "<group>"; };
-		5235CC27155C5FF10095163C /* WHAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WHAppDelegate.h; sourceTree = "<group>"; };
-		5235CC28155C5FF10095163C /* WHAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WHAppDelegate.m; sourceTree = "<group>"; };
+		5235CC26155C5FF10095163C /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		5235CC27155C5FF10095163C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		5235CC28155C5FF10095163C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		523A979F1587E70700E6B9DA /* NimbusPhotos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NimbusPhotos.h; path = libs/nimbus/src/photos/src/NimbusPhotos.h; sourceTree = SOURCE_ROOT; };
 		523A97A01587E70700E6B9DA /* NimbusPhotos+Namespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NimbusPhotos+Namespace.h"; path = "libs/nimbus/src/photos/src/NimbusPhotos+Namespace.h"; sourceTree = SOURCE_ROOT; };
 		523A97A11587E70700E6B9DA /* NIPhotoAlbumScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NIPhotoAlbumScrollView.h; path = libs/nimbus/src/photos/src/NIPhotoAlbumScrollView.h; sourceTree = SOURCE_ROOT; };
@@ -681,10 +681,10 @@
 			children = (
 				5265E59915B7BBEA00173B1C /* Localizable.strings */,
 				52256437157E9571004922B5 /* config.json */,
-				5235CC20155C5FF10095163C /* WhiteHouseApp-Info.plist */,
+				5235CC20155C5FF10095163C /* Info.plist */,
 				5235CC21155C5FF10095163C /* InfoPlist.strings */,
 				5235CC24155C5FF10095163C /* main.m */,
-				5235CC26155C5FF10095163C /* WhiteHouseApp-Prefix.pch */,
+				5235CC26155C5FF10095163C /* Prefix.pch */,
 				5265E73615B8B01200173B1C /* AirshipConfig.plist */,
 				520A463915C828C100547BAE /* AppConfig.plist */,
 			);
@@ -839,8 +839,8 @@
 				5208905C15A7785A004CD40F /* Utilities */,
 				52B84B62156351570013E5B9 /* Model */,
 				52B84B5E156350CA0013E5B9 /* Business Logic */,
-				5235CC27155C5FF10095163C /* WHAppDelegate.h */,
-				5235CC28155C5FF10095163C /* WHAppDelegate.m */,
+				5235CC27155C5FF10095163C /* AppDelegate.h */,
+				5235CC28155C5FF10095163C /* AppDelegate.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1067,7 +1067,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5235CC25155C5FF10095163C /* main.m in Sources */,
-				5235CC29155C5FF10095163C /* WHAppDelegate.m in Sources */,
+				5235CC29155C5FF10095163C /* AppDelegate.m in Sources */,
 				52B84B5D15634E160013E5B9 /* WHBlogViewController.m in Sources */,
 				52B84B68156353450013E5B9 /* WHFeedItem.m in Sources */,
 				52B84B6B156355920013E5B9 /* WHFeedParser.m in Sources */,
@@ -1301,13 +1301,13 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/libs";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "WhiteHouseApp/WhiteHouseApp-Prefix.pch";
+				GCC_PREFIX_HEADER = "WhiteHouseApp/Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"\"${SDK_DIR}/usr/include/libxml2\"",
 					"$(SRCROOT)/libs/Airship/**",
 					"$(SRCROOT)/libs/GoogleAnalytics/**",
 				);
-				INFOPLIST_FILE = "WhiteHouseApp/WhiteHouseApp-Info.plist";
+				INFOPLIST_FILE = "WhiteHouseApp/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/libs/Airship",
@@ -1328,13 +1328,13 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/libs";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "WhiteHouseApp/WhiteHouseApp-Prefix.pch";
+				GCC_PREFIX_HEADER = "WhiteHouseApp/Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"\"${SDK_DIR}/usr/include/libxml2\"",
 					"$(SRCROOT)/libs/Airship/**",
 					"$(SRCROOT)/libs/GoogleAnalytics/**",
 				);
-				INFOPLIST_FILE = "WhiteHouseApp/WhiteHouseApp-Info.plist";
+				INFOPLIST_FILE = "WhiteHouseApp/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/libs/Airship",

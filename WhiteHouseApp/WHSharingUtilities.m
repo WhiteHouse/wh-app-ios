@@ -32,7 +32,7 @@
 
 #import "WHSharingUtilities.h"
 
-#import "WHAppDelegate.h"
+#import "AppDelegate.h"
 #import "WHFeedCache.h"
 
 typedef enum {
@@ -96,7 +96,7 @@ static NSString *WHVideoFavoriteInstructionsDefaultKey = @"VideoSharingInstructi
 
 - (void)shareOnFacebook
 {
-    WHAppDelegate *appDelegate = (WHAppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelegate shareOnFacebook:self.feedItem];
 }
 

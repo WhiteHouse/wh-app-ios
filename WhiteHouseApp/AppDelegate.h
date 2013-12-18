@@ -25,7 +25,7 @@
  */
 
 //
-//  WHAppDelegate.h
+//  AppDelegate.h
 //  WhiteHouseApp
 //
 //
@@ -38,7 +38,7 @@
 #import "WHFeedViewController.h"
 #import "WHLiveController.h"
 
-@interface WHAppDelegate : UIResponder <UIApplicationDelegate, UIAlertViewDelegate> {
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UIAlertViewDelegate> {
     int liveSectionMenuIndex;
 }
 

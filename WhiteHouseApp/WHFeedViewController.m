@@ -36,7 +36,7 @@
 #import "WHLiveBarController.h"
 #import "WHFeedCollection.h"
 #import "WHLiveController.h"
-#import "WHAppDelegate.h"
+#import "AppDelegate.h"
 #import "CustomBadge.h"
 
 NSDate *DayFromDate(NSDate *date)
@@ -115,7 +115,7 @@ NSDate *DayFromDate(NSDate *date)
         [self.popover dismissPopoverAnimated:YES];
         self.popover = nil;
     } else {
-        WHLiveBarController *liveBarController = ((WHAppDelegate *)[UIApplication sharedApplication].delegate).liveBarController;
+        WHLiveBarController *liveBarController = ((AppDelegate *)[UIApplication sharedApplication].delegate).liveBarController;
         WHLivePopoverViewController *live = [[WHLivePopoverViewController alloc] initWithNibName:nil bundle:nil];
         live.items = liveBarController.items;
         live.parentFeedViewController = self;
@@ -154,7 +154,7 @@ NSDate *DayFromDate(NSDate *date)
         [button sizeToFit];
         
         // add our handy-dandy badge
-        WHLiveBarController *liveBarController = ((WHAppDelegate *)[UIApplication sharedApplication].delegate).liveBarController;
+        WHLiveBarController *liveBarController = ((AppDelegate *)[UIApplication sharedApplication].delegate).liveBarController;
         NSInteger n = liveBarController.items.count;
         
         NSString *badgeString = [NSString stringWithFormat:@"%i", n];
@@ -248,7 +248,7 @@ NSDate *DayFromDate(NSDate *date)
     [[[GAI sharedInstance] defaultTracker] sendView:[self trackingPathComponent]];
     
     // get the root/shared live bar controller
-    WHLiveBarController *liveBarController = ((WHAppDelegate *)[UIApplication sharedApplication].delegate).liveBarController;
+    WHLiveBarController *liveBarController = ((AppDelegate *)[UIApplication sharedApplication].delegate).liveBarController;
     [liveBarController.liveBarView removeFromSuperview];
     
     if (!self.isLiveBarHidden) {

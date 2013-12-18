@@ -32,7 +32,7 @@
 
 #import "WHArticleViewController.h"
 
-#import "WHAppDelegate.h"
+#import "AppDelegate.h"
 #import "NIWebController.h"
 #import "WHSharingUtilities.h"
 

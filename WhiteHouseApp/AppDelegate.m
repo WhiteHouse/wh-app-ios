@@ -25,12 +25,12 @@
  */
 
 //
-//  WHAppDelegate.m
+//  AppDelegate.m
 //  WhiteHouseApp
 //
 //
 
-#import "WHAppDelegate.h"
+#import "AppDelegate.h"
 
 #import "WHRootMenuViewController.h"
 #import "WHFeedCollection.h"
@@ -45,7 +45,7 @@
 #import "UAPush.h"
 
 
-@interface WHAppDelegate ()
+@interface AppDelegate ()
 @property (nonatomic, strong) WHRevealViewController *reveal;
 @property (nonatomic, strong) WHRootMenuViewController *menu;
 @property (nonatomic, strong) WHFeedViewController *liveSectionViewController;
@@ -57,7 +57,7 @@
 @end
 
 
-@implementation WHAppDelegate
+@implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize reveal = _reveal;
