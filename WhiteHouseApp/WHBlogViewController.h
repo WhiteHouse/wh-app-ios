@@ -30,8 +30,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-
 #import "WHFeedViewController.h"
 #import "WHArticleViewController.h"
 #import "NimbusNetworkImage.h"

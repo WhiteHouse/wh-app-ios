@@ -30,8 +30,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-
 @interface WHLivePopoverViewController : UITableViewController
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic, strong) UIPopoverController *popoverController;

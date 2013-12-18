@@ -30,8 +30,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-
 #import "WHFeedItem.h"
 
 typedef void (^FeedItemBlock)(WHFeedItem *);

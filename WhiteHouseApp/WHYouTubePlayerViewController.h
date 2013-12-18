@@ -30,8 +30,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-
 @interface WHYouTubePlayerViewController : UIViewController <UIWebViewDelegate>
 
 - (id)initWithVideoURL:(NSURL *)videoURL;

@@ -30,8 +30,6 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
 @interface WHStyle : NSObject
 
 + (UIFont *)headingFontWithSize:(CGFloat)size;

@@ -30,8 +30,6 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
 #import "WHFeedItem.h"
 
 typedef void (^ WHFeedParserCallback)(WHFeedItem *item);

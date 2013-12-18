@@ -30,11 +30,7 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
-
 typedef BOOL (^ValidatorBlock)(NSData *remoteData);
-
 
 /**
  * Represents a file backed by a local bundle resource and a remote

@@ -30,7 +30,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "WHRootMenuViewController.h"
 #import "WHLiveBarController.h"

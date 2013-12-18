@@ -30,8 +30,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-
 #import "WHFeedItem.h"
 
 @interface WHArticleViewController : UIViewController <UIWebViewDelegate>

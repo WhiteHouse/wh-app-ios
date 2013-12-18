@@ -30,8 +30,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-
 #import "UIViewController+WHFeedItemPresentation.h"
 #import "WHLiveBarController.h"
 #import "WHPullDownView.h"

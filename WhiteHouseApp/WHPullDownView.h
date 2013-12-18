@@ -30,8 +30,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-
 /**
  * This pull-down view manages two subviews to present an interface that allows
  * a user to pull down the handle to display content.
