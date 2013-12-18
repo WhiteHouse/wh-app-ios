@@ -117,25 +117,25 @@ static NSString *WHVideoFavoriteInstructionsDefaultKey = @"VideoSharingInstructi
     NSMutableArray *actions = [NSMutableArray array];
     
     NSString *safariTitle = NSLocalizedString(@"ShareSafari", @"Title for safari button in sharing action sheet");
-    [actions addObject:[NSNumber numberWithInt:ArticleActionSafari]];
+    [actions addObject:@(ArticleActionSafari)];
     [sheet addButtonWithTitle:safariTitle];
     
     if ([MFMailComposeViewController canSendMail]) {
         NSString *mailTitle = NSLocalizedString(@"ShareEmail", @"Title for email button in sharing action sheet");
-        [actions addObject:[NSNumber numberWithInt:ArticleActionEmail]];
+        [actions addObject:@(ArticleActionEmail)];
         [sheet addButtonWithTitle:mailTitle];
     }
     
     NSString *tweetTitle = NSLocalizedString(@"ShareTwitter", @"Title for twitter button in sharing action sheet");
-    [actions addObject:[NSNumber numberWithInt:ArticleActionTweet]];
+    [actions addObject:@(ArticleActionTweet)];
     [sheet addButtonWithTitle:tweetTitle];
     
     NSString *facebook = NSLocalizedString(@"ShareFacebook", @"Title for facebook button in sharing action sheet");
-    [actions addObject:[NSNumber numberWithInt:ArticleActionFacebook]];
+    [actions addObject:@(ArticleActionFacebook)];
     [sheet addButtonWithTitle:facebook];
     
     NSString *favoriteTitle = NSLocalizedString(@"AddToFavorites", @"Title for favorites button in sharing action sheet");
-    [actions addObject:[NSNumber numberWithInt:ArticleActionFavorite]];
+    [actions addObject:@(ArticleActionFavorite)];
     [sheet addButtonWithTitle:favoriteTitle];
     
     [sheet addButtonWithTitle:@"Cancel"];
@@ -153,7 +153,7 @@ static NSString *WHVideoFavoriteInstructionsDefaultKey = @"VideoSharingInstructi
         return;
     }
     
-    int actionID = [[self.actions objectAtIndex:buttonIndex] intValue];
+    int actionID = [(self.actions)[buttonIndex] intValue];
     
     switch (actionID) {
         case ArticleActionSafari:

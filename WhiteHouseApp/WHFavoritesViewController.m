@@ -63,7 +63,7 @@
         DebugLog(@"Feed %@ has %i favorites", feed.feedURL, favorites.count);
         if ([favorites count]) {
             [feedsWithFavorites addObject:feed];
-            [favoritesDict setObject:favorites forKey:feed.feedURL];
+            favoritesDict[feed.feedURL] = favorites;
         }
     }
     
@@ -141,14 +141,14 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return ((WHFeed *)[self.sections objectAtIndex:section]).title;
+    return ((WHFeed *)(self.sections)[section]).title;
 }
 
 
 - (NSArray *)favesForSection:(NSInteger)section
 {
-    WHFeed *feed = [self.sections objectAtIndex:section];
-    NSArray *itemArray = [[self.favoritesDict objectForKey:feed.feedURL] allObjects];
+    WHFeed *feed = (self.sections)[section];
+    NSArray *itemArray = [(self.favoritesDict)[feed.feedURL] allObjects];
     return [itemArray sortedArrayUsingComparator:^NSComparisonResult(WHFeedItem *a, WHFeedItem *b) {
         return [b.pubDate compare:a.pubDate];
     }];
@@ -157,7 +157,7 @@
 
 - (WHFeedItem *)favoriteForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[self favesForSection:indexPath.section] objectAtIndex:indexPath.row];
+    return [self favesForSection:indexPath.section][indexPath.row];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

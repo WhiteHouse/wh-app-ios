@@ -123,7 +123,7 @@
     ENCODE_PROPERTY(mediaContents);
     ENCODE_PROPERTY(enclosureURL);
     ENCODE_PROPERTY(feedURL);
-    [aCoder encodeObject:[NSNumber numberWithBool:self.isFavorited] forKey:@"isFavorited"];
+    [aCoder encodeObject:@(self.isFavorited) forKey:@"isFavorited"];
 }
 
 #define DECODE_PROPERTY(name) self.name = [aDecoder decodeObjectForKey:@#name]

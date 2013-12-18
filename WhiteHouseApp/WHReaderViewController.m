@@ -159,7 +159,7 @@ static CGFloat padding = 10.0;
         int itemIndex = (indexPath.row * READER_PANELS_PER_ROW) + ii;
         if (itemIndex < self.posts.count) {
             [panel setHidden:NO];
-            WHFeedItem *item = [self.posts objectAtIndex:itemIndex];
+            WHFeedItem *item = (self.posts)[itemIndex];
             panel.feedItem = item;
             
             UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemTapped:)];

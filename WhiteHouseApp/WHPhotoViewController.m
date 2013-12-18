@@ -71,7 +71,7 @@
 
 - (void)share:(id)sender
 {
-    WHFeedItem *item = [self.feedItems objectAtIndex:self.photoAlbumView.centerPageIndex];
+    WHFeedItem *item = (self.feedItems)[self.photoAlbumView.centerPageIndex];
     [self.sharing share:item];
 }
 
@@ -103,7 +103,7 @@
 
 - (void)loadPhotoAtIndex:(NSInteger)photoIndex
 {
-    WHFeedItem *item = [self.feedItems objectAtIndex:photoIndex];
+    WHFeedItem *item = (self.feedItems)[photoIndex];
     WHMediaElement *mediaContent = [item bestContentForWidth:[UIScreen mainScreen].bounds.size.width];
     NINetworkRequestOperation *loadOp = [[NINetworkRequestOperation alloc] initWithURL:mediaContent.URL];
     loadOp.tag = photoIndex;
@@ -119,7 +119,7 @@
 
 - (void)loadThumbnailAtIndex:(NSInteger)photoIndex
 {
-    WHFeedItem *item = [self.feedItems objectAtIndex:photoIndex];
+    WHFeedItem *item = (self.feedItems)[photoIndex];
     
     // get the smallest thumbnail available
     WHMediaElement *mediaContent = [item bestThumbnailForWidth:0];
@@ -165,7 +165,7 @@
     photoScrollView.zoomingAboveOriginalSizeIsEnabled = [self.photoAlbumView isZoomingAboveOriginalSizeEnabled];
     
     WHCaptionedPhotoView* captionedView = (WHCaptionedPhotoView *)pageView;
-    WHFeedItem *item = [[self feedItems] objectAtIndex:pageIndex];
+    WHFeedItem *item = [self feedItems][pageIndex];
     [captionedView setCaption:item.descriptionText];
     
     if (self.isChromeHidden) {

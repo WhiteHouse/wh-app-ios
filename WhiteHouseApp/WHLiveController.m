@@ -76,7 +76,7 @@ NSString * const WHLiveEventsChangedLiveItemsKey = @"liveItems";
     DebugLog(@"%i items are actually live", liveItems.count);
 
     // show the live bar
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:liveItems forKey:WHLiveEventsChangedLiveItemsKey];
+    NSDictionary *userInfo = @{WHLiveEventsChangedLiveItemsKey: liveItems};
     [[NSNotificationCenter defaultCenter] postNotificationName:WHLiveEventsChangedNotification object:self userInfo:userInfo];
 }
 

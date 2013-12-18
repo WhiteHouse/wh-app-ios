@@ -80,9 +80,9 @@
 - (void)movieFinished:(NSNotification *)notification
 {
     DebugLog(@"movie finished: %@", notification.userInfo);
-    NSInteger reason = [[notification.userInfo objectForKey:MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] intValue];
+    NSInteger reason = [(notification.userInfo)[MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] intValue];
     if (reason == MPMovieFinishReasonPlaybackError) {
-        NSError *error = [notification.userInfo objectForKey:@"error"];
+        NSError *error = (notification.userInfo)[@"error"];
         
         NSString *errorTitle = NSLocalizedString(@"VideoErrorTitle", @"Title for video playback error alert");
         NSString *localizedErrorMessage = NSLocalizedString(@"VideoErrorMessage", @"Error shown when video fails to play");

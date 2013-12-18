@@ -3,27 +3,27 @@
                   {
                   "title":"BLOG",
                   "view-type":"article-list",
-                  "feed-url":"http://example.com/feed/mobile/blog"
+                  "feed-url":"http://whitehouse.gov/feed/mobile/blog"
                   },
                   {
                   "title":"PRESS RELEASES",
                   "view-type":"article-list",
-                  "feed-url":"http://example.com/feed/press"
+                  "feed-url":"http://whitehouse.gov/feed/press"
                   },
                   {
                   "title":"PHOTOS",
                   "view-type":"photo-gallery",
-                  "feed-url":"http://example.com/feed/mobile/photos"
+                  "feed-url":"http://whitehouse.gov/feed/mobile/photos"
                   },
                   {
                   "title":"VIDEOS",
                   "view-type":"video-gallery",
-                  "feed-url":"http://example.com/feed/mobile/video"
+                  "feed-url":"http://whitehouse.gov/feed/mobile/video"
                   },
                   {
                   "title":"LIVE",
                   "view-type":"live",
-                  "feed-url":"http://example.com/feed/mobile/live"
+                  "feed-url":"http://whitehouse.gov/feed/mobile/live"
                   }
                   ]
 }

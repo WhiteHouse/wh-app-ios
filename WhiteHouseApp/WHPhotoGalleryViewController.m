@@ -156,7 +156,7 @@ static CGSize idealThumbSize;
 {
     int itemIndex = (row * _thumbnailsPerRow) + col;
     if (itemIndex < self.posts.count) {
-        return [self.posts objectAtIndex:itemIndex];
+        return (self.posts)[itemIndex];
     }
     
     return nil;

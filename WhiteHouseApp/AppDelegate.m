@@ -87,7 +87,7 @@
 - (WHMenuItem *)createMenuItem:(UIViewController *)viewController
 {
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    navController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[WHStyle headingFontWithSize:22.0], UITextAttributeFont, nil];
+    navController.navigationBar.titleTextAttributes = @{UITextAttributeFont: [WHStyle headingFontWithSize:22.0]};
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(revealToggle:)];
     viewController.navigationItem.leftBarButtonItem = menuButton;
     return [[WHMenuItem alloc] initWithTitle:viewController.title icon:nil viewController:navController];
@@ -137,13 +137,13 @@
     
     NSDictionary *feedConfig = [self feedConfig];
     
-    NSArray *menuItemsConfig = [feedConfig objectForKey:@"feeds"];
+    NSArray *menuItemsConfig = feedConfig[@"feeds"];
     
     int currentIndex = 0;
     for (NSDictionary *itemConfig in menuItemsConfig) {
-        NSString *title = [itemConfig objectForKey:@"title"];
-        NSURL *feedURL = [NSURL URLWithString:[itemConfig objectForKey:@"feed-url"]];
-        NSString *viewType = [itemConfig objectForKey:@"view-type"];
+        NSString *title = itemConfig[@"title"];
+        NSURL *feedURL = [NSURL URLWithString:itemConfig[@"feed-url"]];
+        NSString *viewType = itemConfig[@"view-type"];
         
         WHFeed *feed = nil;
         if (feedURL) {
@@ -158,7 +158,7 @@
         if ([viewType isEqualToString:@"article-list"]) {
             if (NIIsPad()) {
                 WHReaderViewController *reader = [[WHReaderViewController alloc] initWithFeed:feed];
-                NSNumber *showAuthor = [itemConfig objectForKey:@"show-author"];
+                NSNumber *showAuthor = itemConfig[@"show-author"];
                 reader.showAuthor = [showAuthor boolValue];
                 viewController = reader;
             } else {
@@ -220,7 +220,7 @@
     }
     
     self.menu = [self loadMenu];
-    UIViewController *defaultViewController = [[self.menu.menuItems objectAtIndex:0] viewController];
+    UIViewController *defaultViewController = [(self.menu.menuItems)[0] viewController];
     self.reveal = [[WHRevealViewController alloc] initWithMenuViewController:self.menu contentViewController:defaultViewController];
     self.window.rootViewController = self.reveal;
     
@@ -230,7 +230,7 @@
     self.menu.selectedMenuItemIndex = 0;
     
     // notifications MUST be handled after the menu is loaded
-    NSDictionary *note = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    NSDictionary *note = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if (note) {
         [self handleNotification:note];
     }
@@ -294,9 +294,9 @@
 #ifdef DEBUG
 - (void)testNotification
 {
-    NSDictionary *aps = [NSDictionary dictionaryWithObjectsAndKeys:@"test DEBUG", @"alert", nil];
-    NSDictionary *custom = [NSDictionary dictionaryWithObjectsAndKeys:@"http://google.com", @"video-url", nil];
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:aps, @"aps", custom, @"wh", nil];
+    NSDictionary *aps = @{@"alert": @"test DEBUG"};
+    NSDictionary *custom = @{@"video-url": @"http://google.com"};
+    NSDictionary *userInfo = @{@"aps": aps, @"wh": custom};
     [self application:[UIApplication sharedApplication] didReceiveRemoteNotification:userInfo];
 }
 #endif
@@ -304,15 +304,15 @@
 
 + (id)customDataForNotification:(NSDictionary *)userInfo
 {
-    return [userInfo objectForKey:@"wh"];
+    return userInfo[@"wh"];
 }
 
 
 - (void)handleNotification:(NSDictionary *)userInfo
 {
     NSDictionary *custom = [[self class] customDataForNotification:userInfo];
-    NSString *notificationURLString = [custom objectForKey:@"video-url"];
-    if ([[custom objectForKey:@"action"] isEqualToString:@"go-live"] || notificationURLString != nil) {
+    NSString *notificationURLString = custom[@"video-url"];
+    if ([custom[@"action"] isEqualToString:@"go-live"] || notificationURLString != nil) {
         self.menu.selectedMenuItemIndex = liveSectionMenuIndex;
         
         if (notificationURLString) {
@@ -345,7 +345,7 @@
         self.pendingNotification = userInfo;
         
         // the aps.alert value is the only text displayed (the alert has no title)
-        NSString *message = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+        NSString *message = userInfo[@"aps"][@"alert"];
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                         message:message
@@ -355,7 +355,7 @@
 
         // if there's a video URL or action, the alert should have a "View" button
         NSDictionary *custom = [[self class] customDataForNotification:userInfo];
-        if ([custom objectForKey:@"video-url"] || [custom objectForKey:@"action"])
+        if (custom[@"video-url"] || custom[@"action"])
         {
             [alert addButtonWithTitle:NSLocalizedString(@"PushNotificationViewButton", @"A button to view the content of a push notification")];
         }
@@ -459,7 +459,7 @@
         media = [item bestThumbnailForWidth:0];
     }
     if (media) {
-        [params setObject:[media.URL absoluteString] forKey:@"picture"];
+        params[@"picture"] = [media.URL absoluteString];
     }
     
     [FBWebDialogs presentFeedDialogModallyWithSession:nil 
