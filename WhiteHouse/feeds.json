@@ -1,0 +1,29 @@
+{
+    "feeds":[
+             {
+             "title":"Blog",
+             "view-type":"article-list",
+             "feed-url":"http://11111011100.whitehouse.gov/feed/mobile/blog"
+             },
+             {
+             "title":"Briefing Room",
+             "view-type":"article-list",
+             "feed-url":"http://11111011100.whitehouse.gov/feed/mobile/newsroom"
+             },
+             {
+             "title":"Photos",
+             "view-type":"photo-gallery",
+             "feed-url":"http://11111011100.whitehouse.gov/feed/mobile/photos"
+             },
+             {
+             "title":"Videos",
+             "view-type":"video-gallery",
+             "feed-url":"http://11111011100.whitehouse.gov/feed/mobile/video"
+             },
+             {
+             "title":"Live",
+             "view-type":"live",
+             "feed-url":"http://11111011100.whitehouse.gov/feed/mobile/live"
+             }
+             ]
+}

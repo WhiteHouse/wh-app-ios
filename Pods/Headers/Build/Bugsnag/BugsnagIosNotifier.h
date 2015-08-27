@@ -1,0 +1,1 @@
+../../../Bugsnag/bugsnag/iOS/BugsnagIosNotifier.h
